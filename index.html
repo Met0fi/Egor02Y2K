@@ -3,261 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Vampire Club — удивительные факты</title>
-    <link rel="stylesheet" href="./styles.css">
-    <script src="./script.js" defer></script>
+    <title>Vampire Club</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-
-    <div class="page-glow"></div>
-
-    <header class="site-header">
-        <div class="top-line">
-            <span>☾</span>
-            <span>VAMPIRE CLUB</span>
-            <span>☽</span>
-        </div>
-
-        <div class="header-content">
-            <div class="moon">◐</div>
-
-            <div>
-                <p class="eyebrow">маленький уголок ночных знаний</p>
-
-                <h1>
-                    Удивительные<br>
-                    <span>факты</span> про вампиров
-                </h1>
-
-                <p class="header-description">
-                    Мило, познавательно и совсем не страшно...
-                </p>
-            </div>
-
-            <div class="bat">🦇</div>
-        </div>
-
-        <nav class="main-nav" aria-label="Основная навигация">
-            <a href="#about">Представление</a>
+    <header>
+        <h1>Vampire Club</h1>
+        <nav>
+            <a href="#about">О вампирах</a>
             <a href="#facts">Факты</a>
-            <a href="#conclusion">Заключение</a>
             <a href="#guestbook">Гостевая книга</a>
         </nav>
     </header>
 
     <main>
-        <section class="intro-section content-section" id="about">
-            <div class="section-number">01 / знакомство</div>
+        <section id="about">
+            <h2>Кто такие вампиры?</h2>
+            <p>Вампиры — персонажи фольклора и литературы. Они питаются кровью и боятся солнца.</p>
+        </section>
 
-            <div class="intro-grid">
-                <div class="character-card">
-                    <div class="portrait">
-                        <div class="portrait-eyes">
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                        <div class="portrait-mouth">⋮⋮⋮</div>
-                    </div>
-
-                    <div class="character-name">
-                        <span>МЕСТО</span>
-                        <strong>ДЛЯ ПЕРСОНАЖА</strong>
-                    </div>
-
-                    <small>150 × 220 px</small>
+        <section id="facts">
+            <h2>Факты</h2>
+            <button id="themeButton">Сменить тему</button>
+            
+            <div class="facts-container">
+                <div class="fact">
+                    <h3>Чеснок</h3>
+                    <p>В одних легендах чеснок отпугивает вампиров, в других — нет.</p>
+                    <button class="fact-btn" data-info="Это зависит от конкретной традиции.">Узнать больше</button>
+                    <p class="fact-info"></p>
                 </div>
 
-                <div class="intro-text">
-                    <h2>Кто такие вампиры?</h2>
+                <div class="fact">
+                    <h3>Зеркала</h3>
+                    <p>Идея об отсутствии отражения появилась в литературе XIX века.</p>
+                    <button class="fact-btn" data-info="Раньше считалось, что зеркала ловят душу.">Узнать больше</button>
+                    <p class="fact-info"></p>
+                </div>
 
-                    <p>
-                        Вампиры — загадочные ночные существа из легенд,
-                        книг, фильмов и старых историй. Одни из них
-                        превращаются в летучих мышей, другие спят в гробах,
-                        а некоторые просто любят тишину, старые замки
-                        и очень тёмные очки.
-                    </p>
-
-                    <p>
-                        На этом сайте собраны несколько удивительных фактов
-                        о вампирах. Нажимай на кнопки, чтобы открыть каждый
-                        из них.
-                    </p>
-
-                    <div class="notice">
-                        <span class="notice-icon">✦</span>
-                        Не забудь включить звук... Хотя здесь пока ничего нет.
-                    </div>
+                <div class="fact">
+                    <h3>Счет</h3>
+                    <p>Существует миф, что вампиры вынуждены пересчитывать рассыпанные зерна.</p>
+                    <button class="fact-btn" data-info="Это занятие отвлекало их от охоты.">Узнать больше</button>
+                    <p class="fact-info"></p>
                 </div>
             </div>
         </section>
 
-        <section class="facts-section content-section" id="facts">
-            <div class="section-number">02 / коллекция фактов</div>
-
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">архив № 001</p>
-                    <h2>Удивительные факты</h2>
-                </div>
-
-                <button class="theme-button" id="themeButton" type="button">
-                    ☾ сменить настроение
-                </button>
-            </div>
-
-            <div class="facts-grid">
-                <article class="fact-card">
-                    <div class="fact-top">
-                        <span class="fact-number">01</span>
-                        <span class="fact-symbol">✦</span>
-                    </div>
-
-                    <h3>Вампиры не всегда боятся чеснока</h3>
-
-                    <p>
-                        В некоторых легендах чеснок отпугивает нечисть,
-                        а в других историях он вообще не упоминается.
-                    </p>
-
-                    <button
-                        class="fact-button"
-                        type="button"
-                        data-fact="Всё зависит от легенды: иногда чеснок — мощная защита, а иногда обычная приправа к ужину.">
-                        Открыть факт
-                    </button>
-
-                    <div class="fact-answer" aria-live="polite"></div>
-                </article>
-
-                <article class="fact-card">
-                    <div class="fact-top">
-                        <span class="fact-number">02</span>
-                        <span class="fact-symbol">✦</span>
-                    </div>
-
-                    <h3>Зеркала появились в легендах не сразу</h3>
-
-                    <p>
-                        Старые истории о вампирах часто обходились без зеркал.
-                        Эта деталь стала особенно популярной позднее.
-                    </p>
-
-                    <button
-                        class="fact-button"
-                        type="button"
-                        data-fact="Отсутствие отражения в зеркале стало одним из самых узнаваемых образов вампира благодаря литературе и кино.">
-                        Открыть факт
-                    </button>
-
-                    <div class="fact-answer" aria-live="polite"></div>
-                </article>
-
-                <article class="fact-card">
-                    <div class="fact-top">
-                        <span class="fact-number">03</span>
-                        <span class="fact-symbol">✦</span>
-                    </div>
-
-                    <h3>Некоторые вампиры умеют считать</h3>
-
-                    <p>
-                        В старых сказаниях встречается необычная слабость:
-                        вампир может остановиться, чтобы пересчитать зёрна.
-                    </p>
-
-                    <button
-                        class="fact-button"
-                        type="button"
-                        data-fact="По одной из легенд, рассыпанные зёрна или семена могли отвлечь вампира — он обязательно начинал их пересчитывать.">
-                        Открыть факт
-                    </button>
-
-                    <div class="fact-answer" aria-live="polite"></div>
-                </article>
-            </div>
-        </section>
-
-        <section class="quote-section">
-            <div class="quote-mark">“</div>
-
-            <blockquote>
-                Ночь — это не конец дня.<br>
-                Это его самая интересная часть.
-            </blockquote>
-
-            <p>— неизвестный обитатель старого замка</p>
-        </section>
-
-        <section class="conclusion-section content-section" id="conclusion">
-            <div class="section-number">03 / заключение</div>
-
-            <div class="conclusion-box">
-                <div>
-                    <p class="eyebrow">последняя запись</p>
-                    <h2>Ночь только начинается</h2>
-                </div>
-
-                <p>
-                    Вампиры живут не только в страшных историях.
-                    Они существуют в музыке, кино, моде, играх и наших
-                    любимых городских легендах. Главное — не забывать
-                    оставлять включённым свет в коридоре.
-                </p>
-            </div>
-        </section>
-
-        <section class="guestbook-section content-section" id="guestbook">
-            <div class="section-number">04 / гостевая книга</div>
-
-            <div class="guestbook-grid">
-                <div>
-                    <p class="eyebrow">оставь послание</p>
-                    <h2>Гостевая книга</h2>
-
-                    <p class="guestbook-description">
-                        Напиши пару слов для следующих посетителей
-                        ночного клуба.
-                    </p>
-                </div>
-
-                <form class="guestbook-form" id="guestbookForm">
-                    <label for="guestName">Твоё имя</label>
-                    <input
-                        id="guestName"
-                        name="name"
-                        type="text"
-                        placeholder="Например, Дракула"
-                        required
-                    >
-
-                    <label for="guestMessage">Послание</label>
-                    <textarea
-                        id="guestMessage"
-                        name="message"
-                        rows="4"
-                        placeholder="Я заглянул в клуб..."
-                        required
-                    ></textarea>
-
-                    <button class="submit-button" type="submit">
-                        Оставить запись
-                    </button>
-
-                    <p class="form-message" id="formMessage"></p>
-                </form>
-            </div>
+        <section id="guestbook">
+            <h2>Гостевая книга</h2>
+            <form id="guestbookForm">
+                <label>
+                    Имя:
+                    <input type="text" name="name" required>
+                </label>
+                <label>
+                    Сообщение:
+                    <textarea name="message" required></textarea>
+                </label>
+                <button type="submit">Отправить</button>
+                <p id="formMessage"></p>
+            </form>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <span>VAMPIRE CLUB © 2025</span>
-        <span>сделано после полуночи</span>
-        <span>☾ ✦ ☽</span>
+    <footer>
+        <p>Vampire Club © 2025</p>
     </footer>
-
 </body>
 </html>
-
