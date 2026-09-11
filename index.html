@@ -3,102 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111111">
-  <title>EGOR02Y2K: домашняя страница</title>
-  <link rel="stylesheet" href="style-new.css?v=20260911-2">
-  <script src="script.js?v=20260911-2" defer></script>
+  <meta name="theme-color" content="#08070b">
+  <title>EGOR02Y2K // ночной архив</title>
+  <link rel="stylesheet" href="style-new.css?v=20260911-3">
+  <script src="script.js?v=20260911-3" defer></script>
 </head>
 <body>
-  <div class="status-strip">[ online ] домашняя страница найдена в папке «разное» [ online ]</div>
-  <main class="site-shell">
-    <header class="masthead">
-      <p class="tiny-note">создано с помощью блокнота, трёх конфет и очень старого компьютера</p>
-      <h1><span>EGOR</span><span>02</span><span>Y2K</span></h1>
-      <p class="tagline">Самое обычное место с не совсем обычным расписанием.</p>
-      <nav class="main-nav" aria-label="Навигация по странице">
-        <a href="#home">вход</a>
-        <a href="#shelf">полка</a>
-        <a href="#door">дверь</a>
-        <a href="#guestbook">гостевая</a>
-      </nav>
-    </header>
+  <div class="noise-layer" aria-hidden="true"></div>
+  <div class="top-alert">[ ВЫ В СЕТИ ] архив открыт с 2002 года // лучше смотреть поздно ночью</div>
+  <div class="page-grid">
+    <aside class="rail rail-left" aria-label="Фото персонажа слева">
+      <div class="rail-title">ФОТО<br>ПЕРСОНАЖА<br>01</div>
+      <div class="photo-slot"><span>место<br>для фото</span><b>NO IMAGE</b></div>
+      <p>если найдёшь снимок, пришли его летучей мышью</p>
+    </aside>
 
-    <section class="welcome-board" id="home">
-      <div class="board-sticker sticker-left">100%<br>ручная<br>сборка</div>
-      <div class="welcome-copy">
-        <p class="window-title">:: ДОМАШНЯЯ СТРАНИЦА ::</p>
-        <h2>Привет, случайный<br>посетитель.</h2>
-        <p>Ты попал в маленький тестовый уголок будущего архива. Пока тут тихо: можно кликать, смотреть на вещи и делать вид, что ты знаешь, куда идёшь.</p>
-        <p class="under-construction">[ страница всё ещё строится ]</p>
-      </div>
-      <div class="signal-box" aria-label="Сигнал в норме">
-        <span class="signal-light"></span>
-        <strong>СИГНАЛ</strong>
-        <small>на удивление нормальный</small>
-      </div>
-    </section>
+    <main class="site-shell">
+      <header class="masthead" id="home">
+        <div class="utility-line"><span>EGOR02Y2K</span><span>домашняя страница</span><span>посетитель: <strong id="visitorCount">000041</strong></span></div>
+        <h1>НОЧНОЙ<br><em>АРХИВ</em></h1>
+        <p class="tagline">удивительные факты о вампирах и прочая темнота</p>
+        <nav class="main-nav" aria-label="Разделы архива">
+          <a href="#facts">факты</a>
+          <a href="#files">файлы</a>
+          <a href="#guestbook">гостевая</a>
+        </nav>
+      </header>
 
-    <section class="shelf-section" id="shelf">
-      <div class="section-label">полка находок № 01</div>
-      <div class="shelf-grid">
-        <article class="odd-card blue-card">
-          <p class="card-tab">найдено утром</p>
-          <h3>Книга без конца</h3>
-          <p>В ней 38 страниц. На каждой написано: «переверни меня ещё раз».</p>
-          <button class="tiny-button" type="button" data-message="Книга рада, что её заметили.">постучать по обложке</button>
-        </article>
-        <article class="odd-card yellow-card">
-          <p class="card-tab">не трогать</p>
-          <h3>Карманное солнце</h3>
-          <p>Греет один носок, если очень долго верить в его существование.</p>
-          <button class="tiny-button" type="button" data-message="Солнце сейчас занято маленькими делами.">спросить, как дела</button>
-        </article>
-        <article class="odd-card pink-card">
-          <p class="card-tab">вроде работает</p>
-          <h3>Кнопка настроения</h3>
-          <p>Она ничего не чинит, зато делает страницу немного другой.</p>
-          <button class="tiny-button mood-button" type="button">нажать осторожно</button>
-        </article>
-      </div>
-      <p class="click-message" id="clickMessage" aria-live="polite">Полка не скрипит. Это хороший знак.</p>
-    </section>
+      <section class="intro-panel">
+        <div class="stamp">НЕ<br>СВЕЖЕЕ</div>
+        <div>
+          <p class="eyebrow">// папка: criaturas nocturnas</p>
+          <h2>Они уже здесь.<br>Просто не любят шум.</h2>
+          <p class="intro-copy">Этот маленький архив собирает вещи, которые обычно рассказывают шёпотом. Никаких спецэффектов: только старые книги, сомнительные заметки и три свободные рамки по краям.</p>
+          <p class="warning">[ не открывать при ярком свете ]</p>
+        </div>
+        <div class="status-box"><span class="status-lamp"></span><strong>СИСТЕМА</strong><small>работает с перебоями</small></div>
+      </section>
 
-    <section class="door-section" id="door">
-      <div class="door-copy">
-        <p class="section-label">коридор без номера</p>
-        <h2>Маленькая дверь<br>в большую комнату</h2>
-        <p>За ней пока ничего страшного: только лампа, ковёр с геометрией и забытый радио-приёмник. Когда-нибудь здесь начнётся история.</p>
-        <button class="door-button" id="doorButton" type="button" aria-expanded="false">проверить ручку</button>
-        <p class="door-message" id="doorMessage" aria-live="polite"></p>
-      </div>
-      <div class="door-scene" aria-hidden="true">
-        <div class="lamp"></div>
-        <div class="door-frame"><div class="door"><span></span></div></div>
-        <div class="rug"></div>
-      </div>
-    </section>
+      <section class="facts-section" id="facts">
+        <div class="section-head"><p class="eyebrow">01 // быстрые сведения</p><button class="theme-button" id="themeButton" type="button">сменить оттенок</button></div>
+        <div class="facts-grid">
+          <article class="fact-card"><div class="fact-top"><span>ФАКТ 001</span><span class="fact-symbol">☾</span></div><h3>Вампиры видят лучше ночью</h3><p>Их глаза отражают больше света. Поэтому на старых плёнках они иногда светятся, как два мокрых уголька.</p><button class="fact-button" type="button" data-answer="Проверено по плёнке: 6 из 10 снимков подозрительно блестят.">показать пометку</button><p class="fact-answer" aria-live="polite"></p></article>
+          <article class="fact-card"><div class="fact-top"><span>ФАКТ 002</span><span class="fact-symbol">✚</span></div><h3>Чеснок пахнет слишком громко</h3><p>Старые легенды говорят, что дело не в магии. Вампиры просто терпеть не могут резкий запах и сразу уходят.</p><button class="fact-button" type="button" data-answer="На полях приписка: «не класть рядом с модемом».">показать пометку</button><p class="fact-answer" aria-live="polite"></p></article>
+          <article class="fact-card"><div class="fact-top"><span>ФАКТ 003</span><span class="fact-symbol">13</span></div><h3>Зеркало не всегда виновато</h3><p>В некоторых историях вампир отражается нормально. Неловкость начинается, когда он узнаёт себя.</p><button class="fact-button" type="button" data-answer="Самая частая причина: зеркало было куплено на распродаже.">показать пометку</button><p class="fact-answer" aria-live="polite"></p></article>
+        </div>
+      </section>
 
-    <section class="guestbook-section" id="guestbook">
-      <div class="guestbook-heading">
-        <p class="section-label">гостевая книга</p>
-        <h2>Оставь короткую<br>запись для стены.</h2>
-      </div>
-      <form class="guestbook" id="guestbookForm">
-        <label for="guestName">как тебя подписать?</label>
-        <input id="guestName" name="name" maxlength="32" placeholder="например, ласточка" required>
-        <label for="guestMessage">и что написать?</label>
-        <textarea id="guestMessage" name="message" rows="4" maxlength="180" placeholder="я был здесь, но не уверен, что надолго" required></textarea>
-        <button type="submit">приклеить записку</button>
-        <p id="guestbookMessage" aria-live="polite"></p>
-      </form>
-    </section>
+      <section class="files-section" id="files">
+        <div class="section-head"><p class="eyebrow">02 // найденные файлы</p><span class="file-count">3 файла .txt</span></div>
+        <div class="file-list">
+          <button class="file-row" type="button" data-file="nightlog"><span>nightlog_1998.txt</span><small>прочитать</small></button>
+          <button class="file-row" type="button" data-file="fieldnotes"><span>fieldnotes_03.txt</span><small>прочитать</small></button>
+          <button class="file-row" type="button" data-file="warning"><span>warning_final.txt</span><small>прочитать</small></button>
+        </div>
+        <div class="file-viewer" id="fileViewer" aria-live="polite">Выбери файл. Только не тот, который мигает.</div>
+      </section>
 
-    <footer>
-      <span>лучше всего смотреть в 1024 × 768</span>
-      <span>посетитель № <strong id="visitorCount">000041</strong></span>
-      <span>обновлено когда-нибудь</span>
-    </footer>
-  </main>
+      <section class="guestbook-section" id="guestbook">
+        <div><p class="eyebrow">03 // гостевая книга</p><h2>Оставь след<br>на полях.</h2><p>Можно написать имя, дату или короткое предупреждение следующему посетителю.</p></div>
+        <form class="guestbook" id="guestbookForm"><label for="guestName">подпись</label><input id="guestName" name="name" maxlength="32" placeholder="например, ночной гость" required><label for="guestMessage">сообщение</label><textarea id="guestMessage" name="message" rows="4" maxlength="180" placeholder="я слышал шаги в коридоре" required></textarea><button type="submit">приклеить записку</button><p id="guestbookMessage" aria-live="polite"></p></form>
+      </section>
+
+      <footer><span>© 2002–2026 ночной архив</span><span>разрешение на просмотр: сомнительное</span><span>1024×768</span></footer>
+    </main>
+
+    <aside class="rail rail-right" aria-label="Фото персонажа справа">
+      <div class="rail-title">ФОТО<br>ПЕРСОНАЖА<br>02</div>
+      <div class="photo-slot photo-slot-tall"><span>место<br>для фото</span><b>NO IMAGE</b></div>
+      <p>не использовать вспышку. серьёзно.</p>
+      <div class="rail-mini">[ архивная<br>копия ]</div>
+    </aside>
+  </div>
+  <div class="bottom-photo" aria-label="Третий слот для фото персонажа"><span>ФОТО ПЕРСОНАЖА 03 // свободная рамка</span></div>
 </body>
 </html>
 
