@@ -1,92 +1,67 @@
-const factButtons = document.querySelectorAll(".fact-button");
-const quietNote = document.querySelector("#quiet-note");
-const counter = document.querySelector("#counter");
-const horrorOverlay = document.querySelector("#horror-overlay");
-const closeHorror = document.querySelector("#close-horror");
-const guestbookForm = document.querySelector("#guestbook-form");
-const guestbookStatus = document.querySelector("#guestbook-status");
+document.addEventListener('DOMContentLoaded', () => {
+    const factButtons = document.querySelectorAll('.fact-button');
 
-let revealedFacts = 0;
-let counterClicks = 0;
+    factButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const card = button.closest('.fact-card');
+            const answer = card.querySelector('.fact-answer');
+            const factText = button.dataset.fact;
 
-function revealFact(button) {
-    const card = button.closest(".fact-card");
-    const isOpen = card.classList.toggle("is-open");
+            const isOpened = answer.classList.contains('visible');
 
-    button.setAttribute("aria-expanded", String(isOpen));
-    button.textContent = isOpen ? "Скрыть факт" : "Открыть факт";
+            if (isOpened) {
+                answer.textContent = '';
+                answer.classList.remove('visible');
+                button.textContent = 'Открыть факт';
+            } else {
+                answer.textContent = factText;
+                answer.classList.add('visible');
+                button.textContent = 'Скрыть факт';
+            }
+        });
+    });
+    const themeButton = document.querySelector('#themeButton');
 
-    if (isOpen) {
-        revealedFacts += 1;
-    } else {
-        revealedFacts -= 1;
-    }
+    themeButton.addEventListener('click', () => {
+        document.body.classList.toggle('soft-mode');
 
-    if (revealedFacts === factButtons.length) {
-        quietNote.hidden = false;
-        document.body.classList.add("haunted");
-    }
-}
+        if (document.body.classList.contains('soft-mode')) {
+            themeButton.textContent = '☼ вернуть ночь';
+        } else {
+            themeButton.textContent = '☾ сменить настроение';
+        }
+    });
+    const guestbookForm = document.querySelector('#guestbookForm');
+    const formMessage = document.querySelector('#formMessage');
 
-function openHorrorWindow() {
-    horrorOverlay.hidden = false;
-    closeHorror.focus();
-}
-
-function closeHorrorWindow() {
-    horrorOverlay.hidden = true;
-    counter.focus();
-}
-
-function handleCounterClick() {
-    counterClicks += 1;
-
-    if (counterClicks === 1) {
-        counter.textContent = "visitors: 000014";
-    }
-
-    if (counterClicks === 2) {
-        counter.textContent = "visitors: 000014";
-    }
-
-    if (counterClicks >= 3 && revealedFacts === factButtons.length) {
-        openHorrorWindow();
-    }
-}
-
-function handleGuestbookSubmit(event) {
-    event.preventDefault();
-
-    const name = document.querySelector("#visitor-name").value.trim();
-
-    if (!name) {
-        guestbookStatus.textContent = "Сначала напиши своё имя.";
-        return;
-    }
-
-    guestbookStatus.textContent = `Спасибо, ${name}. Запись сохранена до следующего обновления страницы.`;
-    guestbookForm.reset();
-}
-
-factButtons.forEach((button) => {
-    button.addEventListener("click", () => revealFact(button));
-});
-
-counter.addEventListener("click", handleCounterClick);
-
-counter.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
+    guestbookForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        handleCounterClick();
-    }
+
+        const nameInput = document.querySelector('#guestName');
+        const messageInput = document.querySelector('#guestMessage');
+
+        const name = nameInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (!name || !message) {
+            formMessage.textContent = 'Заполни оба поля, ночной гость.';
+            return;
+        }
+
+        const guestbookEntry = {
+            name,
+            message,
+            date: new Date().toLocaleDateString('ru-RU')
+        };
+
+        localStorage.setItem(
+            'vampireGuestbookEntry',
+            JSON.stringify(guestbookEntry)
+        );
+
+        formMessage.textContent =
+            `Спасибо, ${name}! Твоё послание осталось в ночном архиве.`;
+
+        guestbookForm.reset();
+    });
 });
-
-closeHorror.addEventListener("click", closeHorrorWindow);
-
-horrorOverlay.addEventListener("click", (event) => {
-    if (event.target === horrorOverlay) {
-        closeHorrorWindow();
-    }
-});
-
-guestbookForm.addEventListener("submit", handleGuestbookSubmit);
