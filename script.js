@@ -1,67 +1,50 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const factButtons = document.querySelectorAll('.fact-button');
+const clickMessage = document.querySelector('#clickMessage');
+const moodButton = document.querySelector('.mood-button');
+const doorButton = document.querySelector('#doorButton');
+const doorScene = document.querySelector('.door-scene');
+const doorMessage = document.querySelector('#doorMessage');
+const guestbookForm = document.querySelector('#guestbookForm');
+const guestbookMessage = document.querySelector('#guestbookMessage');
+const visitorCount = document.querySelector('#visitorCount');
+const findingButtons = document.querySelectorAll('.tiny-button[data-message]');
 
-    factButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            const card = button.closest('.fact-card');
-            const answer = card.querySelector('.fact-answer');
-            const factText = button.dataset.fact;
+let doorIsOpen = false;
+let visitorNumber = Number.parseInt(visitorCount.textContent, 10);
 
-            const isOpened = answer.classList.contains('visible');
-
-            if (isOpened) {
-                answer.textContent = '';
-                answer.classList.remove('visible');
-                button.textContent = 'Открыть факт';
-            } else {
-                answer.textContent = factText;
-                answer.classList.add('visible');
-                button.textContent = 'Скрыть факт';
-            }
-        });
-    });
-    const themeButton = document.querySelector('#themeButton');
-
-    themeButton.addEventListener('click', () => {
-        document.body.classList.toggle('soft-mode');
-
-        if (document.body.classList.contains('soft-mode')) {
-            themeButton.textContent = '☼ вернуть ночь';
-        } else {
-            themeButton.textContent = '☾ сменить настроение';
-        }
-    });
-    const guestbookForm = document.querySelector('#guestbookForm');
-    const formMessage = document.querySelector('#formMessage');
-
-    guestbookForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const nameInput = document.querySelector('#guestName');
-        const messageInput = document.querySelector('#guestMessage');
-
-        const name = nameInput.value.trim();
-        const message = messageInput.value.trim();
-
-        if (!name || !message) {
-            formMessage.textContent = 'Заполни оба поля, ночной гость.';
-            return;
-        }
-
-        const guestbookEntry = {
-            name,
-            message,
-            date: new Date().toLocaleDateString('ru-RU')
-        };
-
-        localStorage.setItem(
-            'vampireGuestbookEntry',
-            JSON.stringify(guestbookEntry)
-        );
-
-        formMessage.textContent =
-            `Спасибо, ${name}! Твоё послание осталось в ночном архиве.`;
-
-        guestbookForm.reset();
-    });
+findingButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    clickMessage.textContent = button.dataset.message;
+  });
 });
+
+moodButton.addEventListener('click', () => {
+  document.body.classList.toggle('alt-mood');
+  const isAltMood = document.body.classList.contains('alt-mood');
+  moodButton.textContent = isAltMood ? 'вернуть прежний цвет' : 'нажать осторожно';
+  clickMessage.textContent = isAltMood ? 'Страница надела другой свитер.' : 'Страница снова в привычном свитере.';
+});
+
+doorButton.addEventListener('click', () => {
+  doorIsOpen = !doorIsOpen;
+  doorScene.classList.toggle('open', doorIsOpen);
+  doorButton.setAttribute('aria-expanded', String(doorIsOpen));
+  doorButton.textContent = doorIsOpen ? 'закрыть тихо' : 'проверить ручку';
+  doorMessage.textContent = doorIsOpen ? 'В комнате играет радио. Оно ловит только прогноз погоды за 2002 год.' : 'Дверь снова стоит ровно. Почти.';
+});
+
+guestbookForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const name = document.querySelector('#guestName').value.trim();
+  const message = document.querySelector('#guestMessage').value.trim();
+
+  if (!name || !message) {
+    guestbookMessage.textContent = 'Нужны и подпись, и хотя бы пара слов.';
+    return;
+  }
+
+  visitorNumber += 1;
+  visitorCount.textContent = String(visitorNumber).padStart(6, '0');
+  guestbookMessage.textContent = `${name}, записка приклеена. Стена всё запомнила.`;
+  guestbookForm.reset();
+});
+
