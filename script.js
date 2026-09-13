@@ -1,1 +1,68 @@
-const visitNumber=document.querySelector('#visitNumber'),footerVisits=document.querySelector('#footerVisits'),moodLine=document.querySelector('#moodLine'),secretLink=document.querySelector('#secretLink'),guestbookForm=document.querySelector('#guestbookForm'),guestbookMessage=document.querySelector('#guestbookMessage'),fileViewer=document.querySelector('#fileViewer'),lightButton=document.querySelector('#lightButton'),lightMessage=document.querySelector('#lightMessage');const visits=Number(localStorage.getItem('egorVisits')||0)+1;localStorage.setItem('egorVisits',visits);visitNumber.textContent=String(visits).padStart(6,'0');footerVisits.textContent=String(visits).padStart(6,'0');if(visits>1){document.body.classList.add('body-crack');moodLine.textContent='Странно. Ты уже был здесь, но счётчик этого не помнит.'}if(visits>3){document.body.classList.add('body-deep');secretLink.hidden=false;moodLine.textContent='Кто-то добавил эту строку после твоего ухода.'}if(new Date().getHours()<6||new Date().getHours()>22)moodLine.textContent='Сейчас хорошее время, чтобы проверить окно.';const notes={one:'night_notes.txt\n\n23:41 — шаги на лестнице.\n23:42 — в доме нет лестницы.',two:'school_project.txt\n\nТема: летучие мыши.\nУчитель сказал, что рисунок смотрит на него.',three:'do_not_open.txt\n\nНе открывать после третьего визита.\nЕсли уже открыл — оставь свет включённым.'};document.querySelectorAll('.fact-button').forEach((b)=>b.addEventListener('click',()=>{const a=b.nextElementSibling;a.textContent=b.dataset.answer;a.classList.toggle('visible')}));document.querySelectorAll('.file-link').forEach((b)=>b.addEventListener('click',()=>{fileViewer.textContent=notes[b.dataset.file]}));lightButton.addEventListener('click',()=>{document.body.classList.toggle('body-deep');lightMessage.textContent=document.body.classList.contains('body-deep')?'свет выключен. не волнуйся.':'свет включён.'});guestbookForm.addEventListener('submit',(e)=>{e.preventDefault();const n=document.querySelector('#guestName').value.trim(),m=document.querySelector('#guestMessage').value.trim();guestbookMessage.textContent=n&&m?n+', запись сохранена. Наверное.':'Напиши имя и сообщение.';if(n&&m)guestbookForm.reset()});
+const visitNumber = document.querySelector('#visitNumber');
+const footerVisits = document.querySelector('#footerVisits');
+const moodLine = document.querySelector('#moodLine');
+const secretLink = document.querySelector('#secretLink');
+const guestbookForm = document.querySelector('#guestbookForm');
+const guestbookMessage = document.querySelector('#guestbookMessage');
+const fileViewer = document.querySelector('#fileViewer');
+const lightButton = document.querySelector('#lightButton');
+const lightMessage = document.querySelector('#lightMessage');
+
+const visits = Number(localStorage.getItem('egorVisits') || 0) + 1;
+localStorage.setItem('egorVisits', visits);
+
+visitNumber.textContent = String(visits).padStart(6, '0');
+footerVisits.textContent = String(visits).padStart(6, '0');
+
+if (visits > 1) {
+  document.body.classList.add('body-crack');
+  moodLine.textContent = 'Странно. Ты уже был здесь, но счётчик этого не помнит.';
+}
+
+if (visits > 3) {
+  document.body.classList.add('body-deep');
+  secretLink.hidden = false;
+  moodLine.textContent = 'Кто-то добавил эту строку после твоего ухода.';
+}
+
+if (new Date().getHours() < 6 || new Date().getHours() > 22) {
+  moodLine.textContent = 'Сейчас хорошее время, чтобы проверить окно.';
+}
+
+const notes = {
+  one: 'night_notes.txt\n\n23:41 — шаги на лестнице.\n23:42 — в доме нет лестницы.',
+  two: 'school_project.txt\n\nТема: летучие мыши.\nУчитель сказал, что рисунок смотрит на него.',
+  three: 'do_not_open.txt\n\nНе открывать после третьего визита.\nЕсли уже открыл — оставь свет включённым.'
+};
+
+document.querySelectorAll('.fact-button').forEach((b) => {
+  b.addEventListener('click', () => {
+    const a = b.nextElementSibling;
+    a.textContent = b.dataset.answer;
+    a.classList.toggle('visible');
+  });
+});
+
+document.querySelectorAll('.file-link').forEach((b) => {
+  b.addEventListener('click', () => {
+    fileViewer.textContent = notes[b.dataset.file];
+  });
+});
+
+lightButton.addEventListener('click', () => {
+  document.body.classList.toggle('body-deep');
+  lightMessage.textContent = document.body.classList.contains('body-deep')
+    ? 'свет выключен. не волнуйся.'
+    : 'свет включён.';
+});
+
+guestbookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const n = document.querySelector('#guestName').value.trim();
+  const m = document.querySelector('#guestMessage').value.trim();
+  guestbookMessage.textContent = n && m
+    ? n + ', запись сохранена. Наверное.'
+    : 'Напиши имя и сообщение.';
+  if (n && m) guestbookForm.reset();
+});
+
