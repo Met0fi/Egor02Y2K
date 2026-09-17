@@ -1,68 +1,78 @@
-const visitNumber = document.querySelector('#visitNumber');
-const footerVisits = document.querySelector('#footerVisits');
-const moodLine = document.querySelector('#moodLine');
-const secretLink = document.querySelector('#secretLink');
-const guestbookForm = document.querySelector('#guestbookForm');
-const guestbookMessage = document.querySelector('#guestbookMessage');
-const fileViewer = document.querySelector('#fileViewer');
-const lightButton = document.querySelector('#lightButton');
-const lightMessage = document.querySelector('#lightMessage');
+const breakSwitch = document.querySelector('#breakSwitch');
+const memoryViewer = document.querySelector('#memoryViewer');
+const wallForm = document.querySelector('#wallForm');
+const wallName = document.querySelector('#wallName');
+const wallMessage = document.querySelector('#wallMessage');
+const wallEntries = document.querySelector('#wallEntries');
+const tinyWindow = document.querySelector('.window-one');
+const closeWindow = document.querySelector('.x-button');
 
-const visits = Number(localStorage.getItem('egorVisits') || 0) + 1;
-localStorage.setItem('egorVisits', visits);
-
-visitNumber.textContent = String(visits).padStart(6, '0');
-footerVisits.textContent = String(visits).padStart(6, '0');
-
-if (visits > 1) {
-  document.body.classList.add('body-crack');
-  moodLine.textContent = 'Странно. Ты уже был здесь, но счётчик этого не помнит.';
-}
-
-if (visits > 3) {
-  document.body.classList.add('body-deep');
-  secretLink.hidden = false;
-  moodLine.textContent = 'Кто-то добавил эту строку после твоего ухода.';
-}
-
-if (new Date().getHours() < 6 || new Date().getHours() > 22) {
-  moodLine.textContent = 'Сейчас хорошее время, чтобы проверить окно.';
-}
-
-const notes = {
-  one: 'night_notes.txt\n\n23:41 — шаги на лестнице.\n23:42 — в доме нет лестницы.',
-  two: 'school_project.txt\n\nТема: летучие мыши.\nУчитель сказал, что рисунок смотрит на него.',
-  three: 'do_not_open.txt\n\nНе открывать после третьего визита.\nЕсли уже открыл — оставь свет включённым.'
+const memories = {
+  a: 'обрывок 01\n\nВ коридоре снова синий свет. Лампа обычная. Значит, дело не в лампе.',
+  b: 'egor_final_final2.bmp\n\nФайл с таким названием не найден. Осталось только имя файла, и почему-то этого достаточно.',
+  c: 'листок из тетради\n\n«не звонить после школы»\nни номера, ни подписи рядом нет.',
+  d: 'папка: НЕ УДАЛЯТЬ\n\nвнутри: рисунки, которые я не помню как рисовал, и пустая папка с названием «потом».',
+  e: 'год не подтверждён\n\n2002? 2003? Я оставил вопросительный знак и перестал проверять.'
 };
 
-document.querySelectorAll('.fact-button').forEach((b) => {
-  b.addEventListener('click', () => {
-    const a = b.nextElementSibling;
-    a.textContent = b.dataset.answer;
-    a.classList.toggle('visible');
+function setBrokenState() {
+  document.body.classList.toggle('memory-broken');
+  const broken = document.body.classList.contains('memory-broken');
+  breakSwitch.textContent = broken ? 'ВЕРНУТЬ КРИВО, НО ИНАЧЕ' : 'СЛОМАТЬ ЕЩЁ СИЛЬНЕЕ';
+}
+
+function showMemory(key) {
+  if (!memories[key]) return;
+  memoryViewer.textContent = memories[key];
+}
+
+function getWallEntries() {
+  try {
+    const value = JSON.parse(localStorage.getItem('egor02Wall') || '[]');
+    return Array.isArray(value) ? value.slice(0, 6) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveWallEntries(entries) {
+  localStorage.setItem('egor02Wall', JSON.stringify(entries.slice(0, 6)));
+}
+
+function renderWallEntries(entries) {
+  wallEntries.replaceChildren();
+  entries.forEach((entry) => {
+    const row = document.createElement('div');
+    const name = document.createElement('b');
+    const text = document.createElement('span');
+    row.className = 'wall-entry';
+    name.textContent = entry.name + ': ';
+    text.textContent = entry.message;
+    row.append(name, text);
+    wallEntries.append(row);
   });
+}
+
+breakSwitch.addEventListener('click', setBrokenState);
+
+document.querySelectorAll('.fragment').forEach((fragment) => {
+  fragment.addEventListener('click', () => showMemory(fragment.dataset.memory));
 });
 
-document.querySelectorAll('.file-link').forEach((b) => {
-  b.addEventListener('click', () => {
-    fileViewer.textContent = notes[b.dataset.file];
-  });
+closeWindow.addEventListener('click', () => {
+  tinyWindow.hidden = true;
 });
 
-lightButton.addEventListener('click', () => {
-  document.body.classList.toggle('body-deep');
-  lightMessage.textContent = document.body.classList.contains('body-deep')
-    ? 'свет выключен. не волнуйся.'
-    : 'свет включён.';
-});
+const initialEntries = getWallEntries();
+renderWallEntries(initialEntries);
 
-guestbookForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const n = document.querySelector('#guestName').value.trim();
-  const m = document.querySelector('#guestMessage').value.trim();
-  guestbookMessage.textContent = n && m
-    ? n + ', запись сохранена. Наверное.'
-    : 'Напиши имя и сообщение.';
-  if (n && m) guestbookForm.reset();
+wallForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const name = wallName.value.trim() || '???';
+  const message = wallMessage.value.trim();
+  if (!message) return;
+  const entries = [{ name, message }, ...getWallEntries()];
+  saveWallEntries(entries);
+  renderWallEntries(entries);
+  wallForm.reset();
 });
-

@@ -3,108 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vampir Memories02</title>
-<link rel="stylesheet" href="style-new.css?v=20260913-3">
-<script src="script.js?v=20260913-3" defer></script>
+<title>EGOR02 // broken memories</title>
+<link rel="stylesheet" href="style-new.css?v=20260917-y2k">
+<script src="script.js?v=20260917-y2k" defer></script>
 </head>
 <body>
-<div class="page-wrap">
-  <div class="top-line">Добро пожаловать на домашнюю страничку одинокого вампира Егора02!</div>
-  <marquee class="ticker" scrollamount="3">*** НОЧНОЙ АРХИВ ЕГОРА *** новые записи появляются после полуночи ***</marquee>
+<div class="ghost-word ghost-word-a" aria-hidden="true">НЕ ПОМНЮ</div>
+<div class="ghost-word ghost-word-b" aria-hidden="true">02</div>
 
-  <header class="site-header">
-    <div class="header-small">VAMPIR MEMORIES02 / личная страница</div>
-    <h1>НОЧНОЙ<br><span>АРХИВ</span></h1>
-    <p class="subtitle">заметки одинокого вампира Егора02</p>
-    <div class="under-construction">СТРАНИЦА ДОСТРАИВАЕТСЯ! * не буди хозяина *</div>
-    <nav class="nav-buttons" aria-label="Навигация">
-      <a class="button88" href="#home">ДОМОЙ</a>
-      <a class="button88" href="#facts">ФАКТЫ</a>
-      <a class="button88" href="#files">ФАЙЛЫ</a>
-      <a class="button88" href="#guestbook">ГОСТЕВАЯ</a>
-    </nav>
-  </header>
-
-  <div class="web-layout">
-    <aside class="sidebar sidebar-left">
-      <section class="side-box portrait-box">
-        <h2>ЕГОР02</h2>
-        <div class="portrait-slot"><img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="Портрет Егора02"></div>
-        <p class="tiny">[ портрет 01 / ночь ]</p>
-      </section>
-      <section class="side-box">
-        <h2>ССЫЛКИ</h2>
-        <a href="#facts">факты о вампирах</a>
-        <a href="#files">найденные файлы</a>
-        <a href="#guestbook">гостевая книга</a>
-      </section>
-      <section class="side-box badges">
-        <div class="badge88">САЙТ<br>2002</div>
-        <div class="badge88 badge-blue">NO<br>SUNLIGHT</div>
-      </section>
-    </aside>
-
-    <main class="main-content">
-      <section id="home" class="panel welcome">
-        <div class="panel-title">*** ПРИВЕТ, ДРУГ ***</div>
-        <p>Это мой ночной уголок. Здесь я записываю то, что замечаю после заката.</p>
-        <p class="soft-note">Если услышишь шаги за окном — не открывай.</p>
-        <div class="visitor-line">Ты у нас <b id="visitNumber">000001</b>-й посетитель.</div>
-        <p id="moodLine" class="mood-line">Сейчас за окном обычная ночь.</p>
-      </section>
-
-      <section id="facts" class="panel">
-        <div class="panel-title">*** УДИВИТЕЛЬНЫЕ ФАКТЫ О ВАМПИРАХ ***</div>
-        <div class="facts-grid">
-          <article class="fact-card blue-card"><h3>ФАКТ №1</h3><p>Вампиры слышат своё имя через закрытое окно.</p><button class="small-button fact-button" data-answer="Окно никто не открывал.">узнать больше</button><p class="fact-answer"></p></article>
-          <article class="fact-card ink-card"><h3>ФАКТ №2</h3><p>Чеснок напоминает некоторым вампирам, что пора домой.</p><button class="small-button fact-button" data-answer="На полях: «домой — это куда?»">узнать больше</button><p class="fact-answer"></p></article>
-          <article class="fact-card slate-card"><h3>ФАКТ №3</h3><p>Иногда тень появляется на стене раньше человека.</p><button class="small-button fact-button" data-answer="Не проверяй это с настольной лампой.">узнать больше</button><p class="fact-answer"></p></article>
-        </div>
-      </section>
-
-      <section id="files" class="panel files-panel">
-        <div class="panel-title">*** МОИ ФАЙЛЫ .TXT ***</div>
-        <p class="file-intro">Нажми на имя файла. Это записи из старой тетради.</p>
-        <div class="file-list">
-          <button class="file-link" data-file="one">night_notes.txt</button>
-          <button class="file-link" data-file="two">school_project.txt</button>
-          <button class="file-link" data-file="three">do_not_open.txt</button>
-        </div>
-        <pre id="fileViewer">файл не выбран</pre>
-        <p id="secretLink" class="secret-link" hidden><a href="vault.html">нашлась ещё одна страница &gt;&gt;</a></p>
-      </section>
-
-      <section id="guestbook" class="panel guest-panel">
-        <div class="panel-title">*** ГОСТЕВАЯ КНИГА ***</div>
-        <p>Оставь короткую запись. Настоящее имя можно не писать.</p>
-        <form id="guestbookForm">
-          <label for="guestName">твоё имя:</label><input id="guestName" maxlength="24" required>
-          <label for="guestMessage">сообщение:</label><textarea id="guestMessage" rows="3" maxlength="120" required></textarea>
-          <button class="button88" type="submit">ОТПРАВИТЬ</button>
-        </form>
-        <p id="guestbookMessage" class="form-message"></p>
-      </section>
-    </main>
-
-    <aside class="sidebar sidebar-right">
-      <section class="side-box portrait-box">
-        <h2>ПОСЛЕ ПОЛУНОЧИ</h2>
-        <div class="portrait-slot portrait-slot-blue"><img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="Портрет Егора02 в синем свете"></div>
-        <p class="tiny">[ портрет 02 / 03:17 ]</p>
-      </section>
-      <section class="side-box">
-        <h2>ТЫКНИ</h2>
-        <button class="small-button" id="lightButton">не трогать</button>
-        <p id="lightMessage" class="tiny"></p>
-      </section>
-      <section class="side-box status-box">
-        <h2>СТАТУС</h2>
-        <p class="tiny">online: 1<br>last update: 14.03.2002</p>
-      </section>
-    </aside>
+<div class="page-shell" id="top">
+  <div class="browser-strip">
+    <span>EGOR02://HOME/BROKEN_MEMORIES</span>
+    <span class="browser-strip-right">эта страница могла выглядеть иначе вчера</span>
   </div>
 
-  <footer><span>© EGOR02Y2K / 2002-2026</span><span>визитов: <b id="footerVisits">000001</b></span></footer>
+  <marquee class="top-marquee" scrollamount="5">НЕ СОРТИРОВАТЬ // НЕ ВЫРАВНИВАТЬ // НЕ ИСКАТЬ ПРАВИЛЬНУЮ ВЕРСИЮ // EGOR02 // СТРАНИЦА ВСЁ ЕЩЁ ДОСТРАИВАЕТСЯ</marquee>
+
+  <header class="masthead">
+    <p class="mast-kicker">домашняя страница / куски памяти / 2002?</p>
+    <h1><span>СЛОМАННЫЕ</span><b>ВОСПОМИНАНИЯ</b></h1>
+    <p class="mast-note">я нашёл эту папку и не стал ничего приводить в порядок.</p>
+
+    <nav class="link-row" aria-label="Навигация">
+      <a href="#me">[кто тут]</a>
+      <a href="#fragments">[обрывки]</a>
+      <a href="#room">[комната]</a>
+      <a href="#wall">[стена]</a>
+      <a href="vault.html">[не открывать]</a>
+    </nav>
+
+    <button class="break-switch" id="breakSwitch" type="button">СЛОМАТЬ ЕЩЁ СИЛЬНЕЕ</button>
+  </header>
+
+  <div class="character character-left">
+    <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="Егор02">
+    <span>это я?</span>
+  </div>
+
+  <div class="character character-right">
+    <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="Егор02, второй рисунок">
+    <span>нет, вот это я</span>
+  </div>
+
+  <main class="memory-field">
+    <section class="scrap scrap-intro" id="me">
+      <div class="tape tape-a" aria-hidden="true"></div>
+      <p class="red-stamp">EGOR02 HOME PAGE</p>
+      <h2>если всё съехало — так и задумано</h2>
+      <p>Здесь нет нормального «обо мне». Есть только Егор02, две картинки, старые куски текста и ощущение, что я уже делал эту страницу, но потерял исходник.</p>
+      <p class="hand-note">не чинить поля. не делать «красиво».</p>
+    </section>
+
+    <aside class="tiny-window window-one" aria-label="короткая записка">
+      <div class="window-title">untitled.txt <button class="x-button" type="button" aria-label="Закрыть декоративное окно">X</button></div>
+      <p>я не помню, зачем сделал сайт.<br>поэтому оставил.</p>
+    </aside>
+
+    <section class="scrap scrap-fragments" id="fragments">
+      <h2>ОБРЫВКИ, КОТОРЫЕ НЕ НАДО СОЕДИНЯТЬ</h2>
+      <div class="fragment-cloud">
+        <button class="fragment fragment-a" data-memory="a" type="button">«в коридоре снова синий свет»</button>
+        <button class="fragment fragment-b" data-memory="b" type="button">egor_final_final2.bmp</button>
+        <button class="fragment fragment-c" data-memory="c" type="button">не звонить после школы</button>
+        <button class="fragment fragment-d" data-memory="d" type="button">папка: НЕ УДАЛЯТЬ</button>
+        <button class="fragment fragment-e" data-memory="e" type="button">2002? 2003? какая разница</button>
+      </div>
+      <pre id="memoryViewer">нажми на любой обрывок ↑</pre>
+    </section>
+
+    <section class="room-board" id="room">
+      <div class="room-label">МОЯ КОМНАТА / НЕ ФОТОГРАФИЯ</div>
+      <p class="room-big">Здесь должно было быть что-то важное.</p>
+      <p>Но осталось: монитор, провод под столом, недописанное имя на полях и слишком громкий системный звук.</p>
+      <p class="room-side">если найдёшь смысл — не пиши мне, я его потерял специально</p>
+      <a class="door-link" href="vault.html">открыть дверь, которая не нужна →</a>
+    </section>
+
+    <section class="list-sheet">
+      <h2>ЧТО ЗДЕСЬ ЕСТЬ</h2>
+      <ul>
+        <li>две версии одного персонажа, обе главнее текста;</li>
+        <li>фон, который повторяется, потому что так лучше;</li>
+        <li>обрывки вместо нормальной биографии;</li>
+        <li>страница, которую можно сломать кнопкой сверху.</li>
+      </ul>
+      <p class="crossed"><s>гостевая книга с красивой формой</s></p>
+      <p>стена. просто стена.</p>
+    </section>
+
+    <section class="wall" id="wall">
+      <h2>НАПИШИ НА СТЕНЕ</h2>
+      <form id="wallForm">
+        <label for="wallName">имя или ник</label>
+        <input id="wallName" maxlength="24" autocomplete="off">
+        <label for="wallMessage">что оставить</label>
+        <textarea id="wallMessage" rows="3" maxlength="160"></textarea>
+        <button type="submit">НАЦАРАПАТЬ</button>
+      </form>
+      <div id="wallEntries" class="wall-entries" aria-live="polite"></div>
+      <p class="local-note">записи остаются только в этом браузере. сервер ничего не хранит.</p>
+    </section>
+
+    <div class="floating-warning">THIS PAGE IS BEST VIEWED WRONG</div>
+    <a class="back-top" href="#top">↑ наверх, если ещё понятно где верх</a>
+  </main>
+
+  <footer>
+    <span>EGOR02 / broken memories</span>
+    <span>последняя версия: та, которую ты сейчас видишь</span>
+  </footer>
 </div>
 </body>
 </html>
