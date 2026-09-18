@@ -4,162 +4,153 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EGOR02 // удивительные факты о вампирах</title>
-<link rel="stylesheet" href="style-new.css?v=20260917-vampire">
-<script src="script.js?v=20260917-vampire" defer></script>
+<link rel="stylesheet" href="style.css?v=4">
+<script src="script.js?v=4" defer></script>
 </head>
-<body>
-<marquee class="warning-line" scrollamount="7">*** ДОБРО ПОЖАЛОВАТЬ НА EGOR02'S VAMPIRE PAGE *** УДИВИТЕЛЬНЫЕ ВАМПИРСКИЕ ФАКТЫ *** СТРАНИЦА ВЕЧНО В РАЗРАБОТКЕ ***</marquee>
-
-<header class="hero" id="top">
-  <div class="hero-copy">
-    <div class="tiny-top">http://egor02/vampires/index.html</div>
-    <h1>УДИВИТЕЛЬНЫЕ<br><span>ФАКТЫ О ВАМПИРАХ</span></h1>
-    <p class="hero-sub">легенды, старые паники, книги, летучие мыши и то, что фильмы потом перепутали</p>
-    <p class="blink-note">ОБНОВЛЕНО НОЧЬЮ / ЧИТАТЬ ЛУЧШЕ ПОСЛЕ 00:00</p>
-    <nav class="raw-links">
-      <a href="#facts">[ФАКТЫ]</a>
-      <a href="#panic">[1725]</a>
-      <a href="#books">[КНИГИ]</a>
-      <a href="#bats">[ЛЕТУЧИЕ МЫШИ]</a>
-      <a href="#myths">[МИФ / НЕ МИФ]</a>
-      <a href="vault.html">[КЛАДБИЩЕ]</a>
+<body data-decay="0">
+<div class="site-shell">
+  <aside class="site-index" aria-label="Навигация">
+    <div class="site-stamp">EGOR02 / VAMPIRE PAGE</div>
+    <img class="index-art index-art-primary" src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="Егор02">
+    <div class="index-address">http://egor02/vampires/index.html</div>
+    <nav class="index-nav">
+      <a href="#facts">ФАКТЫ</a>
+      <a href="#panic">1725</a>
+      <a href="#books">КНИГИ</a>
+      <a href="#bats">ЛЕТУЧИЕ МЫШИ</a>
+      <a href="#myths">МИФ / НЕ МИФ</a>
+      <a href="vault.html">КЛАДБИЩЕ</a>
     </nav>
-  </div>
+    <img class="index-art index-art-secondary" src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="Егор02, второй арт">
+    <div id="visitorCounter" class="visitor-counter">visitor 000001</div>
+  </aside>
 
-  <img class="hero-char hero-char-left" src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="Егор02">
-  <img class="hero-char hero-char-right" src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="Егор02, второй арт">
-</header>
+  <main class="document" id="top">
+    <header class="document-head rot-section rot-0">
+      <p class="file-path">/vampires/index.html</p>
+      <h1>УДИВИТЕЛЬНЫЕ<br><span>ФАКТЫ О ВАМПИРАХ</span></h1>
+      <p class="hero-sub">легенды, старые паники, книги, летучие мыши и то, что фильмы потом перепутали</p>
+    </header>
 
-<div class="char-parade" aria-hidden="true">
-  <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="">
-  <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="">
-  <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="">
-  <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="">
-  <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="">
-  <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="">
+    <section class="intro-jumble rot-section rot-1">
+      <div class="intro-red">
+        <h2>ЧТО ТУТ ВООБЩЕ?</h2>
+        <p>Не «энциклопедия вампиров», а куча вещей, которые реально интереснее стандартного набора про клыки, плащ и чеснок.</p>
+        <p>Часть страницы — про фольклор и историю страхов. Часть — про литературу. Часть — про настоящих вампиров, только они маленькие, летают и живут в Америке.</p>
+      </div>
+      <div class="intro-blue">
+        <b>важно:</b><br>
+        когда здесь написано «вампир», это обычно персонаж легенды или литературы.<br><br>
+        Когда речь про животных, написано «вампирская летучая мышь».
+      </div>
+    </section>
+
+    <section class="fact-zone rot-section rot-2" id="facts">
+      <h2 class="section-title scream">10 ФАКТОВ, КОТОРЫЕ ЛУЧШЕ ОБЫЧНОГО «ВАМПИРЫ БОЯТСЯ ЧЕСНОКА»</h2>
+
+      <table class="fact-table" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="fact-num">01</td>
+          <td class="fact-copy"><b>Слово «вампир» стало международной сенсацией не из-за романа.</b><br>В 1720-х и 1730-х годах сообщения из Сербии о якобы вернувшихся мертвецах попали в официальные отчёты и европейскую печать. Один из самых известных случаев — Петар Благоевич в 1725 году.</td>
+        </tr>
+        <tr>
+          <td class="fact-num">02</td>
+          <td class="fact-copy"><b>Арнольд Паоле тоже стал частью вампирской паники.</b><br>После серии смертей в сербской Медведже в 1731 году военные медики проводили эксгумации. Отчёт разошёлся по Европе и сделал тему вампиров ещё громче.</td>
+        </tr>
+        <tr>
+          <td class="fact-num">03</td>
+          <td class="fact-copy"><b>Способы «остановить вампира» никогда не были одним универсальным правилом.</b><br>В разных местах подозреваемых мертвецов протыкали колом, обезглавливали, сжигали или перезахоранивали. Фольклор менялся от региона к региону.</td>
+        </tr>
+        <tr>
+          <td class="fact-num">04</td>
+          <td class="fact-copy"><b>Вампирские паники были и в Новой Англии.</b><br>В XIX веке семьи иногда вскрывали могилы родственников во время вспышек туберкулёза, надеясь остановить болезнь. Сегодня эти эпизоды часто называют «вампирской паникой Новой Англии».</td>
+        </tr>
+        <tr>
+          <td class="fact-num">05</td>
+          <td class="fact-copy"><b>Дракула не придумал вампира.</b><br>До романа Брэма Стокера 1897 года уже существовали «The Vampyre» Джона Полидори, «Varney the Vampyre» и «Carmilla» Шеридана Ле Фаню.</td>
+        </tr>
+      </table>
+
+      <div class="fact-scatter">
+        <article class="fact-note note-yellow">
+          <b>06 / КЛЫКИ</b>
+          <p>Клыки кажутся вечной частью образа, но массовое кино закрепило их довольно поздно. Даже Дракула Белы Лугоши 1931 года обходился без заметных клыков.</p>
+        </article>
+        <article class="fact-note note-cyan">
+          <b>07 / VARNEY</b>
+          <p><i>Varney the Vampyre</i> выходил в 1845–1847 годах. Британская библиотека отмечает его как один из ранних текстов, где у вампира прямо появляются острые зубы.</p>
+        </article>
+        <article class="fact-note note-white">
+          <b>08 / ЛЕГЕНДА &gt; ЖИВОТНОЕ</b>
+          <p>Вампирская летучая мышь названа в честь легенды о вампирах, а не наоборот. Европейские истории о возвращающихся мертвецах старше знакомства европейцев с этими животными.</p>
+        </article>
+        <article class="fact-note note-pink">
+          <b>09 / ИХ ВСЕГО ТРИ</b>
+          <p>Из более чем тысячи видов летучих мышей только три современных вида питаются кровью. Все они живут в Новом Свете.</p>
+        </article>
+        <article class="fact-note note-green">
+          <b>10 / НЕ ВСЕ ПЬЮТ КРОВЬ МЛЕКОПИТАЮЩИХ</b>
+          <p>Два вида вампирских летучих мышей в основном питаются кровью птиц. Обыкновенный вампир чаще кормится на млекопитающих.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panic-strip rot-section rot-3" id="panic">
+      <div class="panic-year">1725</div>
+      <div class="panic-text">
+        <h2>ПЕТАР БЛАГОЕВИЧ: КОГДА «ВАМПИР» ПОПАЛ В ОТЧЁТ</h2>
+        <p>В деревне Кисилево несколько смертей связали с недавно умершим Петаром Благоевичем. Его тело эксгумировали, осмотрели и сочли «подозрительно свежим». Официальный чиновник описал произошедшее, а история разошлась дальше как печатная сенсация.</p>
+        <p class="panic-small">Это история о страхе, медицине XVIII века и том, как естественные посмертные изменения принимали за доказательство возвращения мёртвых.</p>
+      </div>
+    </section>
+
+    <section class="books-zone rot-section rot-4" id="books">
+      <h2 class="section-title books-title">ВАМПИРЫ ДО ДРАКУЛЫ</h2>
+      <div class="books-line">
+        <div><span>1819</span><b>THE VAMPYRE</b><small>John Polidori</small></div>
+        <div><span>1845–47</span><b>VARNEY THE VAMPYRE</b><small>дешёвый сериал / penny dreadful</small></div>
+        <div><span>1872</span><b>CARMILLA</b><small>Sheridan Le Fanu</small></div>
+        <div class="dracula"><span>1897</span><b>DRACULA</b><small>Bram Stoker</small></div>
+      </div>
+      <p class="books-side">Дракула стал гигантом поп-культуры, но пришёл в уже густо населённый вампирами XIX век.</p>
+    </section>
+
+    <section class="bat-zone rot-section rot-5" id="bats">
+      <div class="bat-title">НАСТОЯЩИЕ ВАМПИРЫ ЛЕТАЮТ</div>
+      <div class="bat-copy">
+        <p><b>3 вида.</b> Все современные «настоящие» вампирские летучие мыши обитают в Центральной и Южной Америке.</p>
+        <p><b>Кровь не высасывают.</b> Они делают маленький надрез и слизывают кровь с поверхности.</p>
+        <p><b>Имя пришло из фольклора.</b> Европейская легенда была раньше.</p>
+      </div>
+      <div class="bat-repeat" aria-hidden="true">VAMPIRE BAT VAMPIRE BAT VAMPIRE BAT VAMPIRE BAT VAMPIRE BAT</div>
+    </section>
+
+    <section class="myth-zone rot-section rot-6" id="myths">
+      <h2>МИФ / НЕ МИФ / СЛОЖНЕЕ</h2>
+      <p class="myth-lead">Нажми на фразу. Ответ появится прямо под ней.</p>
+      <div class="myth-grid">
+        <button class="myth-button" data-answer="В фольклоре нет одного общего правила. Чеснок связан с частью восточноевропейских традиций, но не со всеми вампирскими историями.">«ВСЕ ВАМПИРЫ БОЯТСЯ ЧЕСНОКА»</button>
+        <button class="myth-button" data-answer="Нет. Образ менялся веками: от разложившегося возвращенца в народных поверьях до аристократа, красавца, чудовища или романтического героя.">«ВАМПИР ВСЕГДА ВЫГЛЯДИТ КАК ДРАКУЛА»</button>
+        <button class="myth-button" data-answer="Нет. Исторические подозрения в вампиризме часто возникали вокруг болезней и непонятных посмертных изменений тела, а не вокруг театральных укусов в шею.">«ДВА ПРОКОЛА НА ШЕЕ — ДРЕВНЕЙШИЙ ПРИЗНАК»</button>
+        <button class="myth-button" data-answer="Да, но таких видов только три. И легенда о вампирах появилась не из-за них.">«ЕСТЬ ЖИВОТНЫЕ, КОТОРЫЕ ЖИВУТ НА КРОВИ»</button>
+      </div>
+      <div id="mythAnswer" class="myth-answer">выбери миф ↑</div>
+    </section>
+
+    <section class="sources-zone rot-section rot-7">
+      <h2>ГДЕ ЭТО ПРОВЕРИТЬ</h2>
+      <p><a href="https://www.smithsonianmag.com/history/decomposing-bodies-1720s-gave-birth-first-vampire-panic-180976097/">Smithsonian — vampire panic of the 1720s</a></p>
+      <p><a href="https://www.smithsonianmag.com/history/meet-the-real-life-vampires-of-new-england-and-abroad-42639093/">Smithsonian — New England and European vampire scares</a></p>
+      <p><a href="https://www.si.edu/spotlight/bats/batfacts">Smithsonian — vampire bats</a></p>
+      <p><a href="https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library">British Library — Varney the Vampyre</a></p>
+      <p><a href="https://www.britishlibrary.cn/en/works/dracula/">British Library — Dracula, first edition 1897</a></p>
+    </section>
+
+    <footer class="site-footer rot-section rot-8">
+      <div>EGOR02 VAMPIRE PAGE // made for weird monitors</div>
+      <a href="#top">BACK TO TOP</a>
+    </footer>
+  </main>
 </div>
-
-<main>
-  <section class="intro-jumble">
-    <div class="intro-red">
-      <h2>ЧТО ТУТ ВООБЩЕ?</h2>
-      <p>Не «энциклопедия вампиров», а куча вещей, которые реально интереснее стандартного набора про клыки, плащ и чеснок.</p>
-      <p>Часть страницы — про фольклор и историю страхов. Часть — про литературу. Часть — про настоящих вампиров, только они маленькие, летают и живут в Америке.</p>
-    </div>
-    <div class="intro-blue">
-      <b>важно:</b><br>
-      когда здесь написано «вампир», это обычно персонаж легенды или литературы.<br><br>
-      Когда речь про животных, написано «вампирская летучая мышь».
-    </div>
-    <div class="intro-tag">NO SUNLIGHT REQUIRED</div>
-  </section>
-
-  <section class="fact-zone" id="facts">
-    <h2 class="section-title scream">10 ФАКТОВ, КОТОРЫЕ ЛУЧШЕ ОБЫЧНОГО «ВАМПИРЫ БОЯТСЯ ЧЕСНОКА»</h2>
-
-    <table class="fact-table" cellspacing="0" cellpadding="0">
-      <tr>
-        <td class="fact-num">01</td>
-        <td class="fact-copy"><b>Слово «вампир» стало международной сенсацией не из-за романа.</b><br>В 1720-х и 1730-х годах сообщения из Сербии о якобы вернувшихся мертвецах попали в официальные отчёты и европейскую печать. Один из самых известных случаев — Петар Благоевич в 1725 году.</td>
-      </tr>
-      <tr>
-        <td class="fact-num">02</td>
-        <td class="fact-copy"><b>Арнольд Паоле тоже стал частью вампирской паники.</b><br>После серии смертей в сербской Медведже в 1731 году военные медики проводили эксгумации. Отчёт разошёлся по Европе и сделал тему вампиров ещё громче.</td>
-      </tr>
-      <tr>
-        <td class="fact-num">03</td>
-        <td class="fact-copy"><b>Способы «остановить вампира» никогда не были одним универсальным правилом.</b><br>В разных местах подозреваемых мертвецов протыкали колом, обезглавливали, сжигали или перезахоранивали. Фольклор менялся от региона к региону.</td>
-      </tr>
-      <tr>
-        <td class="fact-num">04</td>
-        <td class="fact-copy"><b>Вампирские паники были и в Новой Англии.</b><br>В XIX веке семьи иногда вскрывали могилы родственников во время вспышек туберкулёза, надеясь остановить болезнь. Сегодня эти эпизоды часто называют «вампирской паникой Новой Англии».</td>
-      </tr>
-      <tr>
-        <td class="fact-num">05</td>
-        <td class="fact-copy"><b>Дракула не придумал вампира.</b><br>До романа Брэма Стокера 1897 года уже существовали «The Vampyre» Джона Полидори, «Varney the Vampyre» и «Carmilla» Шеридана Ле Фаню.</td>
-      </tr>
-    </table>
-
-    <div class="fact-scatter">
-      <article class="fact-note note-yellow">
-        <b>06 / КЛЫКИ</b>
-        <p>Клыки кажутся вечной частью образа, но массовое кино закрепило их довольно поздно. Даже Дракула Белы Лугоши 1931 года обходился без заметных клыков.</p>
-      </article>
-      <article class="fact-note note-cyan">
-        <b>07 / VARNEY</b>
-        <p><i>Varney the Vampyre</i> выходил в 1845–1847 годах. Британская библиотека отмечает его как один из ранних текстов, где у вампира прямо появляются острые зубы.</p>
-      </article>
-      <article class="fact-note note-white">
-        <b>08 / ЛЕГЕНДА &gt; ЖИВОТНОЕ</b>
-        <p>Вампирская летучая мышь названа в честь легенды о вампирах, а не наоборот. Европейские истории о возвращающихся мертвецах старше знакомства европейцев с этими животными.</p>
-      </article>
-      <article class="fact-note note-pink">
-        <b>09 / ИХ ВСЕГО ТРИ</b>
-        <p>Из более чем тысячи видов летучих мышей только три современных вида питаются кровью. Все они живут в Новом Свете.</p>
-      </article>
-      <article class="fact-note note-green">
-        <b>10 / НЕ ВСЕ ПЬЮТ КРОВЬ МЛЕКОПИТАЮЩИХ</b>
-        <p>Два вида вампирских летучих мышей в основном питаются кровью птиц. Обыкновенный вампир чаще кормится на млекопитающих.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="panic-strip" id="panic">
-    <div class="panic-year">1725</div>
-    <div class="panic-text">
-      <h2>ПЕТАР БЛАГОЕВИЧ: КОГДА «ВАМПИР» ПОПАЛ В ОТЧЁТ</h2>
-      <p>В деревне Кисилево несколько смертей связали с недавно умершим Петаром Благоевичем. Его тело эксгумировали, осмотрели и сочли «подозрительно свежим». Официальный чиновник описал произошедшее, а история разошлась дальше как печатная сенсация.</p>
-      <p class="panic-small">Это история о страхе, медицине XVIII века и том, как естественные посмертные изменения принимали за доказательство возвращения мёртвых.</p>
-    </div>
-  </section>
-
-  <section class="books-zone" id="books">
-    <h2 class="section-title books-title">ВАМПИРЫ ДО ДРАКУЛЫ</h2>
-    <div class="books-line">
-      <div><span>1819</span><b>THE VAMPYRE</b><small>John Polidori</small></div>
-      <div><span>1845–47</span><b>VARNEY THE VAMPYRE</b><small>дешёвый сериал / penny dreadful</small></div>
-      <div><span>1872</span><b>CARMILLA</b><small>Sheridan Le Fanu</small></div>
-      <div class="dracula"><span>1897</span><b>DRACULA</b><small>Bram Stoker</small></div>
-    </div>
-    <p class="books-side">Дракула стал гигантом поп-культуры, но пришёл в уже густо населённый вампирами XIX век.</p>
-  </section>
-
-  <section class="bat-zone" id="bats">
-    <div class="bat-title">НАСТОЯЩИЕ ВАМПИРЫ ЛЕТАЮТ</div>
-    <div class="bat-copy">
-      <p><b>3 вида.</b> Все современные «настоящие» вампирские летучие мыши обитают в Центральной и Южной Америке.</p>
-      <p><b>Кровь не высасывают.</b> Они делают маленький надрез и слизывают кровь с поверхности.</p>
-      <p><b>Имя пришло из фольклора.</b> Европейская легенда была раньше.</p>
-    </div>
-    <div class="bat-repeat" aria-hidden="true">VAMPIRE BAT VAMPIRE BAT VAMPIRE BAT VAMPIRE BAT VAMPIRE BAT</div>
-  </section>
-
-  <section class="myth-zone" id="myths">
-    <h2>МИФ / НЕ МИФ / СЛОЖНЕЕ</h2>
-    <p class="myth-lead">Нажми на фразу. Ответ появится прямо под ней.</p>
-    <div class="myth-grid">
-      <button class="myth-button" data-answer="В фольклоре нет одного общего правила. Чеснок связан с частью восточноевропейских традиций, но не со всеми вампирскими историями.">«ВСЕ ВАМПИРЫ БОЯТСЯ ЧЕСНОКА»</button>
-      <button class="myth-button" data-answer="Нет. Образ менялся веками: от разложившегося возвращенца в народных поверьях до аристократа, красавца, чудовища или романтического героя.">«ВАМПИР ВСЕГДА ВЫГЛЯДИТ КАК ДРАКУЛА»</button>
-      <button class="myth-button" data-answer="Нет. Исторические подозрения в вампиризме часто возникали вокруг болезней и непонятных посмертных изменений тела, а не вокруг театральных укусов в шею.">«ДВА ПРОКОЛА НА ШЕЕ — ДРЕВНЕЙШИЙ ПРИЗНАК»</button>
-      <button class="myth-button" data-answer="Да, но таких видов только три. И легенда о вампирах появилась не из-за них.">«ЕСТЬ ЖИВОТНЫЕ, КОТОРЫЕ ЖИВУТ НА КРОВИ»</button>
-    </div>
-    <div id="mythAnswer" class="myth-answer">выбери миф ↑</div>
-  </section>
-
-  <section class="sources-zone">
-    <h2>ГДЕ ЭТО ПРОВЕРИТЬ</h2>
-    <p><a href="https://www.smithsonianmag.com/history/decomposing-bodies-1720s-gave-birth-first-vampire-panic-180976097/">Smithsonian — vampire panic of the 1720s</a></p>
-    <p><a href="https://www.smithsonianmag.com/history/meet-the-real-life-vampires-of-new-england-and-abroad-42639093/">Smithsonian — New England and European vampire scares</a></p>
-    <p><a href="https://www.si.edu/spotlight/bats/batfacts">Smithsonian — vampire bats</a></p>
-    <p><a href="https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library">British Library — Varney the Vampyre</a></p>
-    <p><a href="https://www.britishlibrary.cn/en/works/dracula/">British Library — Dracula, first edition 1897</a></p>
-  </section>
-</main>
-
-<footer>
-  <div>EGOR02 VAMPIRE PAGE // made for weird monitors</div>
-  <div id="visitorCounter">visitor 000001</div>
-  <a href="#top">BACK TO TOP</a>
-</footer>
 </body>
 </html>
