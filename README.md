@@ -1,4 +1,5 @@
-# Egor02Y2K
-Egor02Y2Ksiii1111te
+EGOR02 // vampire page
 
-https://met0fi.github.io/Egor02Y2K/
+не воровать арт.
+если midi не играет — поставь winamp.
+гостевая книга в guestbook.html

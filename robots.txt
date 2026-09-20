@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /kisiljevo
+Disallow: /cgi-bin
+Disallow: /you
+# last crawl 04-Aug-2004
