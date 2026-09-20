@@ -3,13 +3,7 @@
   var SECRET_KEY = "egor02_secrets";
   var GUEST_KEY = "egor02_guestbook";
 
-  var TITLES = {
-    0: "EGOR02 // удивительные факты о вампирах",
-    1: "EGOR02 // удивительные факты о вампирах",
-    2: "EGOR02 // факты о вампирах (не все)",
-    3: "EGOR02 // не читай вслух",
-    4: "index.html was last modified 4 Aug 1725",
-  };
+  var SITE_TITLE = "Vamprie?02";
 
   var PLANTED = [
     { id: "p1", name: "kitty666", text: "крутая страничка!! добавь кармиллу срочно", date: "04.08.2003" },
@@ -91,9 +85,7 @@
   var secrets = readSecrets();
 
   document.documentElement.dataset.decay = String(decay);
-  if (!document.documentElement.dataset.page) {
-    document.title = TITLES[decay] || document.title;
-  }
+  document.title = SITE_TITLE;
 
   document.querySelectorAll("[data-secret]").forEach(function (el) {
     el.addEventListener("click", function () {
