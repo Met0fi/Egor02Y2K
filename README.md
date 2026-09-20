@@ -1,1 +1,1 @@
-https://github.com/Met0fi/Egor02Y2K
+met0fi.github.io/Egor02Y2K
