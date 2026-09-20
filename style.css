@@ -39,23 +39,34 @@ html,
 body {
     min-height: 100%;
     max-width: 100%;
-    overflow-x: hidden;
-}
-
-html {
-  background-color: var(--color-tile);
-  background-image: url("fonsite.png");
-  background-repeat: repeat;
-  background-size: 400px 400px;
+    overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
   color: var(--color-ink);
   font-family: var(--font-times);
   font-size: 16px;
   line-height: 1.35;
+}
+
+html,
+body,
+.wallpaper {
+  background-color: #07070a;
+  background-image: url("fonsite.png");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+}
+
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
 a {
@@ -76,30 +87,36 @@ a:hover {
   color: var(--color-header-ink);
 }
 
-html[data-decay="2"] {
+html[data-decay="2"],
+html[data-decay="2"] body,
+html[data-decay="2"] .wallpaper {
   background-size: 360px 360px;
 }
 
-html[data-decay="3"] {
+html[data-decay="3"],
+html[data-decay="3"] body,
+html[data-decay="3"] .wallpaper {
   background-size: 300px 300px;
 }
 
-html[data-decay="4"] {
+html[data-decay="4"],
+html[data-decay="4"] body,
+html[data-decay="4"] .wallpaper {
   background-size: 220px 220px;
 }
 
-html[data-page="lost"] {
+html[data-page="lost"],
+html[data-page="lost"] body,
+html[data-page="lost"] .wallpaper {
   background-image: none;
   background-color: #000;
 }
 
-html[data-page="bare"] {
+html[data-page="bare"],
+html[data-page="bare"] body,
+html[data-page="bare"] .wallpaper {
   background-image: none;
   background-color: #f4f2fa;
-}
-
-html[data-page="bare"] body {
-  background: #f4f2fa;
 }
 
 .marquee-bar {
