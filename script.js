@@ -2,7 +2,8 @@
   var VISIT_KEY = "egor02_visits";
   var SECRET_KEY = "egor02_secrets";
   var GUEST_KEY = "egor02_guestbook";
-
+  var KEYS_KEY = "egor02_keys";
+  var RIFT_KEY = "egor02_rift";
   var SITE_TITLE = "Vamprie?02";
 
   var PLANTED = [
@@ -10,6 +11,14 @@
     { id: "p2", name: "drakula_fan", text: "арт огонь. откуда брал?? можно воровать? шучу", date: "12.11.2003" },
     { id: "p3", name: "лёха", text: "midi не работает лол поставь winamp", date: "03.03.2004" },
     { id: "p4", name: "EGOR02", text: "я потом доделаю. не трогайте файлы в cgi-bin", date: "04.08.2004" },
+    {
+      id: "p5",
+      name: "To4hnoNeDroft",
+      text: "у меня аура этого блядского бефана. он уголь носит, не торт. торт егор пёк сам.",
+      date: "22.09.2026",
+      img: "guest/befana.jpg",
+      alt: "УГОЛЬ"
+    }
   ];
 
   function decayLevel(visits) {
@@ -48,6 +57,31 @@
     return current;
   }
 
+  function readKeys() {
+    try {
+      var parsed = JSON.parse(localStorage.getItem(KEYS_KEY) || "[]");
+      return Array.isArray(parsed) ? parsed.filter(function (x) { return typeof x === "string"; }) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function readRift() {
+    var n = Number(localStorage.getItem(RIFT_KEY) || 0);
+    return Number.isFinite(n) ? Math.max(0, Math.min(8, n)) : 0;
+  }
+
+  function gainKey(id) {
+    var keys = readKeys();
+    if (keys.indexOf(id) !== -1) return keys;
+    keys.push(id);
+    localStorage.setItem(KEYS_KEY, JSON.stringify(keys));
+    var rift = Math.min(8, readRift() + 1);
+    localStorage.setItem(RIFT_KEY, String(rift));
+    document.documentElement.dataset.rift = String(rift);
+    return keys;
+  }
+
   function readNotes() {
     try {
       var parsed = JSON.parse(localStorage.getItem(GUEST_KEY) || "[]");
@@ -76,16 +110,74 @@
   }
 
   function counterDigits(visits, decay) {
-    if (decay >= 4) return "001725";
+    if (decay >= 4 || readRift() >= 6) return "001725";
     return String(Math.max(0, 41 + visits)).padStart(6, "0").slice(-6);
+  }
+
+  function norm(s) {
+    return String(s || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .replace(/ё/g, "е");
+  }
+
+  function infectText(root) {
+    var walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var node;
+    var n = 0;
+    while ((node = walk.nextNode())) {
+      var parent = node.parentElement;
+      if (!parent) continue;
+      var tag = parent.tagName;
+      if (tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT" || tag === "PRE") continue;
+      if (parent.classList && parent.classList.contains("no-rot")) continue;
+      n += 1;
+      var t = String(node.nodeValue);
+      if (n % 3 === 0) t = t.replace(/[А-Яа-яA-Za-z]{5,}/g, function (w) {
+        return w + " ЕГОР02";
+      });
+      if (n % 4 === 0) t = t + " ЕГОР02 ЕГОР02";
+      node.nodeValue = t;
+    }
+  }
+
+  function rotText(root, rift) {
+    if (rift < 2) return;
+    var walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walk.nextNode())) {
+      var parent = node.parentElement;
+      if (!parent) continue;
+      var tag = parent.tagName;
+      if (tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT") continue;
+      if (parent.classList && parent.classList.contains("no-rot")) continue;
+      var t = node.nodeValue;
+      if (rift >= 2) t = t.replace(/2004/g, "1725");
+      if (rift >= 4) t = t.replace(/егор/gi, "ег\u00a0р");
+      if (rift >= 6) t = t.replace(/вампир/gi, "вам пир");
+      if (rift >= 7) t = t.replace(/страничка/g, "страни\u00adчка");
+      node.nodeValue = t;
+    }
   }
 
   var visits = bumpVisit();
   var decay = decayLevel(visits);
   var secrets = readSecrets();
+  var keys = readKeys();
+  var rift = readRift();
 
   document.documentElement.dataset.decay = String(decay);
+  document.documentElement.dataset.rift = String(rift);
   document.title = SITE_TITLE;
+
+  if (rift >= 5) {
+    var mq = document.querySelector(".marquee-bar span");
+    if (mq) mq.textContent = "WELCOME TO The Egor02 site!   ***   last ping 04.08.2004 03:17   ***   окно в кухне было открыто   ***   ";
+  }
+  if (rift >= 7) {
+    document.title = " ";
+  }
 
   document.querySelectorAll("[data-secret]").forEach(function (el) {
     el.addEventListener("click", function () {
@@ -98,21 +190,26 @@
     var dot = document.getElementById("footDot");
     if (!dot) return;
     var found = secrets.filter(function (s) { return s !== "you"; });
-    if (found.length >= 3) dot.hidden = false;
+    if (found.length >= 3 || keys.length >= 4) dot.hidden = false;
   }
   revealFooter();
 
   var oldLink = document.getElementById("oldLink");
-  if (oldLink && decay >= 3) oldLink.hidden = false;
+  if (oldLink && (decay >= 3 || rift >= 2)) oldLink.hidden = false;
 
   var wander = document.getElementById("fileWander");
-  if (wander && decay >= 2) wander.hidden = false;
+  if (wander && (decay >= 2 || rift >= 1)) wander.hidden = false;
 
   var whisper = document.getElementById("whisper");
-  if (whisper && decay >= 3) {
+  if (whisper && (decay >= 3 || rift >= 2)) {
     whisper.hidden = false;
-    whisper.textContent = decay >= 4 ? "он ещё в отчёте" : "папка old не должна открываться";
+    if (rift >= 5) whisper.innerHTML = "кухня не в vault. <a href=\"kitchen.html\">печь</a>";
+    else if (decay >= 4) whisper.textContent = "он ещё в отчёте";
+    else whisper.textContent = "папка old не должна открываться";
   }
+
+  var kitchenHint = document.getElementById("kitchenHint");
+  if (kitchenHint && rift >= 4) kitchenHint.hidden = false;
 
   var listing = document.getElementById("listing");
   if (listing) {
@@ -122,10 +219,16 @@
       "bats.html           12-Nov-2003  18:11",
       "vault.html          01-Jan-2004  00:00",
       "cgi-bin/                    <dir>",
-      "old/                        <dir>",
+      "old/                        <dir>"
     ];
-    if (decay >= 3) rows.push("kisiljevo.htm       21-Jul-1725   1k");
-    if (decay >= 4) rows.push("you.htm             ????-??-??     0");
+    if (decay >= 3 || rift >= 2) rows.push("kisiljevo.htm       21-Jul-1725   1k");
+    if (decay >= 4 || rift >= 3) rows.push("you.htm             ????-??-??     0");
+    if (rift >= 1) rows.push("guest/befana.jpg    22-Sep-2026   ??");
+    if (rift >= 4) rows.push("kitchen.htm         04-Aug-2004  03:17");
+    if (rift >= 2) rows.push("fangs.htm           04-Aug-2004  ?");
+    if (rift >= 3) rows.push("memories.htm        ????         ");
+    if (rift >= 6) rows.push("cake.htm            ????         forbidden");
+    if (rift >= 6) rows.push("couldjustbite.htm   ????         ");
     listing.textContent = "Index of /vampires\n\n" + rows.join("\n");
   }
 
@@ -142,6 +245,7 @@
       clicks += 1;
       if (clicks >= 6) {
         secrets = writeSecret("counter");
+        keys = gainKey("counter");
         location.href = "log.html";
       }
     });
@@ -149,9 +253,14 @@
 
   var midiDead = document.getElementById("midiDead");
   if (midiDead) {
+    var midiClicks = 0;
     midiDead.addEventListener("click", function () {
+      midiClicks += 1;
       var msg = document.getElementById("midiMsg");
-      if (msg) msg.textContent = decay >= 3 ? "файл есть. трек не тот." : "Your browser does not support the audio element.";
+      if (midiClicks >= 3) {
+        keys = gainKey("midi");
+        msg.textContent = "файл есть. трек не тот.";
+      }
     });
   }
 
@@ -160,7 +269,8 @@
       var dir = btn.getAttribute("data-ring");
       var ring = ["guestbook.html", "vault.html", "bats.html", "old.html"];
       if (dir === "random") {
-        var pool = decay >= 2 ? ring.concat(["kisiljevo.html"]) : ring.slice();
+        var pool = decay >= 2 || rift >= 1 ? ring.concat(["kisiljevo.html"]) : ring.slice();
+        if (rift >= 4) pool.push("kitchen.html");
         var pick = pool[Math.floor(Math.random() * pool.length)];
         if (pick === "kisiljevo.html") secrets = writeSecret("kisiljevo");
         if (pick === "old.html") secrets = writeSecret("old");
@@ -184,15 +294,16 @@
   if (guestForm) {
     function decayNotes() {
       var extra = [];
-      if (decay >= 2) extra.push({ id: "d2", name: "p.b.", text: "still fresh", date: "21.07.1725" });
-      if (decay >= 4) extra.push({ id: "d4", name: "", text: "окно в кухне было открыто", date: "04.08.2004" });
+      if (decay >= 2 || rift >= 2) extra.push({ id: "d2", name: "p.b.", text: "still fresh", date: "21.07.1725" });
+      if (decay >= 4 || rift >= 3) extra.push({ id: "d4", name: "", text: "окно в кухне было открыто", date: "04.08.2004" });
+      if (rift >= 5) extra.push({ id: "d5", name: "печь", text: "пароль не уголь. уголь — только бефана.", date: "??.??.????" });
       return extra;
     }
     function renderNotes() {
-      var all = decayNotes().concat(readNotes());
       var box = document.getElementById("guestExtra") || document.getElementById("guestNotes");
       if (!box) return;
       box.innerHTML = "";
+      var all = decayNotes().concat(readNotes());
       all.forEach(function (n) {
         var row = document.createElement("div");
         row.className = "note-row";
@@ -206,22 +317,77 @@
         div.textContent = n.text;
         row.appendChild(b);
         row.appendChild(div);
+        if (n.img) {
+          var fig = document.createElement("figure");
+          fig.className = "guest-fig";
+          var im = document.createElement("img");
+          im.src = n.img;
+          im.alt = n.alt || "";
+          im.className = "guest-pic";
+          im.id = "befanaPic";
+          fig.appendChild(im);
+          var cap = document.createElement("figcaption");
+          cap.className = "guest-cap";
+          cap.textContent = "подпись: " + (n.alt || "");
+          fig.appendChild(cap);
+          row.appendChild(fig);
+        }
         box.appendChild(row);
       });
+      var pic = document.getElementById("befanaPic");
+      if (pic) {
+        var taps = 0;
+        pic.addEventListener("click", function () {
+          taps += 1;
+          if (taps >= 3) {
+            keys = gainKey("befana");
+            var cap = pic.parentElement.querySelector("figcaption");
+            if (cap) cap.textContent = "бефана уже был. печь: cgi-bin → oven.cgi";
+          }
+        });
+      }
     }
     renderNotes();
+    var pic = document.getElementById("befanaPic");
+    if (pic && !pic.dataset.bound) {
+      pic.dataset.bound = "1";
+      var taps = 0;
+      pic.addEventListener("click", function () {
+        taps += 1;
+        if (taps >= 3) {
+          keys = gainKey("befana");
+          var cap = pic.parentElement.querySelector("figcaption");
+          if (cap) cap.textContent = "бефана уже был. печь: cgi-bin → oven.cgi";
+        }
+      });
+    }
     guestForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var name = (guestForm.elements.name.value || "").slice(0, 32);
       var text = (guestForm.elements.text.value || "").slice(0, 180);
       var flash = document.getElementById("guestFlash");
+      var raw = norm(text);
       if (!text.trim()) {
         flash.textContent = "пустое не приму";
         return;
       }
       if (isPetarName(name)) {
         secrets = writeSecret("kisiljevo");
+        keys = gainKey("petar");
         flash.textContent = "запись принята. смотри не ту папку.";
+      } else if (raw === "уголь" || raw === "уголь.") {
+        keys = gainKey("coal");
+        flash.textContent = "уголь принят. этим торт не испечёшь. ищи печь.";
+      } else if (raw === "0408" || raw === "04.08" || raw === "04.08.2004") {
+        keys = gainKey("date");
+        flash.textContent = "это день. не год. печь это знает.";
+      } else if (raw === "befana" || raw === "бефана") {
+        keys = gainKey("befana");
+        flash.textContent = "он уголь носит. пароль длиннее.";
+      } else if (raw === "егорвампирокурки") {
+        keys = gainKey("kurki");
+        localStorage.setItem(RIFT_KEY, String(Math.max(readRift(), 7)));
+        flash.textContent = "печь это знает. иди на кухню.";
       } else {
         flash.textContent = "спасибо. если с вирусом — сам виноват.";
       }
@@ -229,7 +395,7 @@
         id: Date.now() + "-" + Math.random().toString(16).slice(2, 6),
         name: name.trim() || "аноним",
         text: text.trim(),
-        date: formatToday(),
+        date: formatToday()
       });
       guestForm.reset();
       renderNotes();
@@ -238,48 +404,221 @@
 
   if (location.pathname.indexOf("kisiljevo") !== -1) {
     secrets = writeSecret("kisiljevo");
-    if (decay >= 3) document.getElementById("again").hidden = false;
-    if (decay >= 4) {
-      document.getElementById("unfinished").hidden = true;
-      document.getElementById("lastPing").hidden = false;
+    keys = gainKey("kisil");
+    if (decay >= 3 || rift >= 2) {
+      var again = document.getElementById("again");
+      if (again) again.hidden = false;
+    }
+    if (decay >= 4 || rift >= 3) {
+      var unf = document.getElementById("unfinished");
+      var ping = document.getElementById("lastPing");
+      if (unf) unf.hidden = true;
+      if (ping) ping.hidden = false;
+    }
+    var fromForm = document.getElementById("frombaldForm");
+    if (fromForm) {
+      fromForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var v = norm(fromForm.elements.who.value);
+        var out = document.getElementById("frombaldFlash");
+        if (v === "frombald" || v === "фромбальд" || v === "frombald.") {
+          keys = gainKey("frombald");
+          out.textContent = "чиновник записан. 21.07.1725. это не пароль печи. это год в счётчике.";
+        } else {
+          out.textContent = "не он. в рапорте фамилия австрийца.";
+        }
+      });
     }
   }
 
   if (location.pathname.indexOf("cgi-bin") !== -1) {
     secrets = writeSecret("cgi");
-    document.getElementById("resetCounter").addEventListener("click", function () {
-      localStorage.removeItem(VISIT_KEY);
-      localStorage.removeItem(SECRET_KEY);
-      location.href = "index.html";
-    });
+    keys = gainKey("cgi");
+    var reset = document.getElementById("resetCounter");
+    if (reset) {
+      reset.addEventListener("click", function () {
+        localStorage.removeItem(VISIT_KEY);
+        localStorage.removeItem(SECRET_KEY);
+        localStorage.removeItem(KEYS_KEY);
+        localStorage.removeItem(RIFT_KEY);
+        location.href = "index.html";
+      });
+    }
   }
 
   if (location.pathname.indexOf("old.html") !== -1) {
     secrets = writeSecret("old");
+    keys = gainKey("old");
   }
 
   if (location.pathname.indexOf("log.html") !== -1) {
     secrets = writeSecret("counter");
-    document.getElementById("accessLog").textContent =
-      '127.0.0.1 - - [04/Aug/2003:21:02:11] "GET /index.html"\n' +
-      '10.0.0.6 - - [12/Nov/2003:18:11:40] "GET /bats.html"\n' +
-      '172.16.0.2 - - [01/Jan/2004:00:00:01] "GET /vault.html"\n' +
-      '127.0.0.1 - - [04/Aug/2004:03:17:02] "PUT /kisiljevo.htm"\n' +
-      '0.0.0.0 - - [21/Jul/1725:00:00:00] "GET /kisiljevo.htm"\n' +
-      "127.0.0.1 - - [now] visits=" + visits + " secrets=" + (secrets.join(",") || "none");
+    var log = document.getElementById("accessLog");
+    if (log) {
+      log.textContent =
+        "127.0.0.1 - - [04/Aug/2003:21:02:11] \"GET /index.html\"\n" +
+        "10.0.0.6 - - [12/Nov/2003:18:11:40] \"GET /bats.html\"\n" +
+        "172.16.0.2 - - [01/Jan/2004:00:00:01] \"GET /vault.html\"\n" +
+        "127.0.0.1 - - [04/Aug/2004:03:17:02] \"PUT /kisiljevo.htm\"\n" +
+        "0.0.0.0 - - [21/Jul/1725:00:00:00] \"GET /kisiljevo.htm\"\n" +
+        "127.0.0.1 - - [04/Aug/2004:03:18:44] \"GET /oven.cgi?hint=date\" 403\n" +
+        "22.09.2026 - - [now] \"POST /guestbook.html\" To4hnoNeDroft\n" +
+        "127.0.0.1 - - [now] visits=" + visits + " rift=" + rift + " keys=" + (keys.join(",") || "none");
+    }
   }
 
   if (location.pathname.indexOf("you.html") !== -1) {
     secrets = writeSecret("you");
     var found = secrets.filter(function (s) { return s !== "you"; });
     var root = document.getElementById("youRoot");
-    if (found.length < 3) {
+    if (found.length < 3 && keys.length < 4) {
       root.innerHTML = "<p>ты рано.</p><p><a href=\"index.html\">index.html</a></p>";
     } else {
+      keys = gainKey("you");
       root.innerHTML =
-        " <h1>ты сломал счётчик</h1><p>и гостевую</p><p>и папку old</p><p>егора нет с 04.08.2004</p><p>дерево было справа.</p><p><a href=\"index.html\">.</a></p>";
+        "<h1>ты сломал счётчик</h1><p>и гостевую</p><p>и папку old</p><p>егора нет с 04.08.2004</p><p>дерево было справа.</p><p>торт на кухне. печь просит два слова через дефис.</p><p><a href=\"kitchen.html\">кухня</a> · <a href=\"index.html\">.</a></p>";
     }
   }
 
+  if (location.pathname.indexOf("bats") !== -1) {
+    var missing = document.querySelector("img[src=\"missing-bat.gif\"]");
+    if (!missing) missing = document.querySelector(".on-tile img");
+    if (missing) {
+      var bt = 0;
+      missing.addEventListener("click", function () {
+        bt += 1;
+        if (bt >= 3) {
+          keys = gainKey("bats");
+          missing.alt = "три свечи. дата без года.";
+          var slot = document.getElementById("batSlotNote");
+          if (slot) slot.hidden = false;
+        }
+      });
+    }
+  }
+
+  var ovenForm = document.getElementById("ovenForm");
+  if (ovenForm) {
+    ovenForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = norm(ovenForm.elements.pass.value);
+      var out = document.getElementById("ovenFlash");
+      if (v === "уголь") {
+        keys = gainKey("coal");
+        out.textContent = "уголь в ящике. торт не из этого.";
+      } else if (v === "0408" || v === "04.08") {
+        keys = gainKey("date");
+        out.textContent = "день принят. не хватает первого слова.";
+      } else if (v === "1725") {
+        keys = gainKey("year");
+        out.textContent = "это счётчик. не печь.";
+      } else if (v === "frombald" || v === "фромбальд") {
+        keys = gainKey("frombald");
+        out.textContent = "чиновник не печёт.";
+      } else if (v === "befana" || v === "бефана") {
+        keys = gainKey("befana");
+        out.textContent = "первое слово есть. второе — дата без года и точек.";
+      } else if (v === "befana-0408" || v === "бефана-0408") {
+        keys = gainKey("oven");
+        localStorage.setItem(RIFT_KEY, "7");
+        location.href = "kitchen.html";
+      } else if (v === "егорвампирокурки") {
+        keys = gainKey("kurki");
+        keys = gainKey("oven");
+        localStorage.setItem(RIFT_KEY, "7");
+        location.href = "kitchen.html";
+      } else {
+        out.textContent = "403 forbidden";
+      }
+    });
+  }
+
+  if (location.pathname.indexOf("kitchen") !== -1) {
+    var gate = document.getElementById("kitchenGate");
+    var room = document.getElementById("kitchenRoom");
+    if (keys.indexOf("oven") !== -1 || rift >= 7) {
+      if (gate) gate.hidden = true;
+      if (room) room.hidden = false;
+      keys = gainKey("kitchen");
+    } else if (gate && room) {
+      gate.hidden = false;
+      room.hidden = true;
+    }
+  }
+
+  if (location.pathname.indexOf("cake") !== -1) {
+    if (keys.indexOf("oven") === -1 && rift < 7) {
+      location.href = "kitchen.html";
+    } else {
+      localStorage.setItem(RIFT_KEY, "8");
+      document.documentElement.dataset.rift = "8";
+      keys = gainKey("cake");
+    }
+  }
+
+  if (location.pathname.indexOf("commits") !== -1) {
+    keys = gainKey("commit");
+    var commitForm = document.getElementById("commitForm");
+    if (commitForm) {
+      commitForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var v = norm(commitForm.elements.pass.value);
+        var out = document.getElementById("commitFlash");
+        if (v === "егорвампирокурки") {
+          keys = gainKey("kurki");
+          keys = gainKey("oven");
+          localStorage.setItem(RIFT_KEY, String(Math.max(readRift(), 7)));
+          location.href = "kitchen.html";
+        } else if (v === "befana-0408" || v === "бефана-0408") {
+          keys = gainKey("oven");
+          localStorage.setItem(RIFT_KEY, "7");
+          location.href = "kitchen.html";
+        } else {
+          out.textContent = "это не сообщение коммита";
+        }
+      });
+    }
+  }
+
+  if (location.pathname.indexOf("couldjustbite") !== -1) {
+    keys = gainKey("smile");
+    infectText(document.body);
+  }
+
+  if (location.pathname.indexOf("whoareyouhidingfrom") !== -1) {
+    keys = gainKey("hide");
+    infectText(document.body);
+    window.alert("nosey nosey");
+  }
+
+  if (location.pathname.indexOf("memories") !== -1) {
+    keys = gainKey("memory");
+  }
+
+  if (location.pathname.indexOf("fangs") !== -1) {
+    keys = gainKey("fangs");
+  }
+
+  if (location.pathname.indexOf("teeth") !== -1) {
+    keys = gainKey("teeth");
+  }
+
+  document.querySelectorAll(".voice-dead").forEach(function (el) {
+    var taps = 0;
+    el.addEventListener("click", function () {
+      taps += 1;
+      el.textContent = taps === 1 ? "plugin missing" : "файл есть. трек не тот.";
+      if (taps >= 2) keys = gainKey("voice");
+    });
+  });
+
+  rotText(document.body, readRift());
   revealFooter();
+
+  try {
+    if (rift === 0) console.info("печь не на index");
+    else if (rift < 4) console.info("hit.txt растёт сам");
+    else if (rift < 7) console.info("BEFANA-0408");
+    else console.info("свечи уже стояли");
+  } catch (e) {}
 })();
