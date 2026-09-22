@@ -1,5 +1,5 @@
 (function () {
-  var VISIT_KEY = "egor02_visit";
+  var VISIT_KEY = "egor02_visits";
   var SECRET_KEY = "egor02_secrets";
   var GUEST_KEY = "egor02_guestbook";
   var KEYS_KEY = "egor02_keys";
