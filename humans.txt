@@ -4,3 +4,5 @@ do not email about homework
 if you are looking for the report it is not in vault
 the cake is not in vault either
 history is in the commits
+bytes are not latin
+out is not home
