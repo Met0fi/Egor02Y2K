@@ -6,13 +6,13 @@
 <title>Vamprie?02</title>
 <meta name="theme-color" content="#9aabc8">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=preview3">
+<link rel="stylesheet" href="style.css?v=preview4">
 <style>
 .guest-fig{margin:10px 0 0 0}
 .guest-pic{display:block;max-width:280px;width:100%;height:auto;border:2px outset #c4c0cc;cursor:pointer;background:#c8c4d4}
 .guest-cap{font-family:"Courier New",Courier,monospace;font-size:12px;color:#5a5068;margin-top:4px}
 </style>
-<script src="script.js?v=preview3" defer></script>
+<script src="script.js?v=preview4" defer></script>
 </head>
 <body>
 <div class="wallpaper" aria-hidden="true"></div>
@@ -55,9 +55,12 @@
 <div id="guestExtra"></div>
 <p class="site-foot">© 2002–2004 EGOR02 · <a href="vault.html">кладбище</a><a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
 <script>
-fetch("guest/befana.b64").then(function(r){return r.text();}).then(function(t){
+Promise.all([
+  fetch("guest/befana.b64a").then(function(r){return r.text();}),
+  fetch("guest/befana.b64b").then(function(r){return r.text();})
+]).then(function(p){
   var im=document.getElementById("befanaPic");
-  if(im) im.src="data:image/jpeg;base64,"+t.replace(/\s/g,"");
+  if(im) im.src="data:image/jpeg;base64,"+(p[0]+p[1]).replace(/\s/g,"");
 }).catch(function(){});
 </script>
 </body>
