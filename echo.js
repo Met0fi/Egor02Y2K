@@ -33,7 +33,7 @@
     }, true);
   });
 
-  if (location.pathname.indexOf("couldjustbite") === -1) return;
+  if (location.pathname.indexOf("glaza") === -1 && location.pathname.indexOf("couldjustbite") === -1) return;
   var seed = document.getElementById("echoSeed");
   if (!seed) return;
   var n = 0;
@@ -58,7 +58,7 @@
     }
     seed.parentNode.appendChild(block);
     if (n === 12) {
-      try { window.alert("nosey nosey"); } catch (e2) {}
+      try { window.alert("не смотри так"); } catch (e2) {}
     }
     busy = false;
   }
