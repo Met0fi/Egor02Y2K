@@ -205,7 +205,7 @@
     whisper.hidden = false;
     if (rift >= 5) whisper.innerHTML = "кухня не в vault. <a href=\"kitchen.html\">печь</a>";
     else if (decay >= 4) whisper.textContent = "он ещё в отчёте";
-    else whisper.textContent = "папка old не должна открываться";
+    else whisper.textContent = "папка old сама не должна была открыться";
   }
 
   var kitchenHint = document.getElementById("kitchenHint");
@@ -259,7 +259,7 @@
       var msg = document.getElementById("midiMsg");
       if (midiClicks >= 3) {
         keys = gainKey("midi");
-        msg.textContent = "файл есть. трек не тот.";
+        msg.textContent = "файл на месте. играет вообще не то.";
       }
     });
   }
@@ -296,7 +296,7 @@
       var extra = [];
       if (decay >= 2 || rift >= 2) extra.push({ id: "d2", name: "p.b.", text: "still fresh", date: "21.07.1725" });
       if (decay >= 4 || rift >= 3) extra.push({ id: "d4", name: "", text: "окно в кухне было открыто", date: "04.08.2004" });
-      if (rift >= 5) extra.push({ id: "d5", name: "печь", text: "пароль не уголь. уголь — только бефана.", date: "??.??.????" });
+      if (rift >= 5) extra.push({ id: "d5", name: "печь", text: "пароль не уголь. уголь - только бефана.", date: "??.??.????" });
       return extra;
     }
     function renderNotes() {
@@ -368,28 +368,28 @@
       var flash = document.getElementById("guestFlash");
       var raw = norm(text);
       if (!text.trim()) {
-        flash.textContent = "пустое не приму";
+        flash.textContent = "пустую запись не приклею";
         return;
       }
       if (isPetarName(name)) {
         secrets = writeSecret("kisiljevo");
         keys = gainKey("petar");
-        flash.textContent = "запись принята. смотри не ту папку.";
+        flash.textContent = "запись приклеена. теперь посмотри не в ту папку.";
       } else if (raw === "уголь" || raw === "уголь.") {
         keys = gainKey("coal");
-        flash.textContent = "уголь принят. этим торт не испечёшь. ищи печь.";
+        flash.textContent = "уголь принят, но торт из него не испечёшь. ищи печь.";
       } else if (raw === "0408" || raw === "04.08" || raw === "04.08.2004") {
         keys = gainKey("date");
-        flash.textContent = "это день. не год. печь это знает.";
+        flash.textContent = "день подходит. год не нужен. печь это знает.";
       } else if (raw === "befana" || raw === "бефана") {
         keys = gainKey("befana");
-        flash.textContent = "он уголь носит. пароль длиннее.";
+        flash.textContent = "он приносит уголь. пароль длиннее одного слова.";
       } else if (raw === "егорвампирокурки") {
         keys = gainKey("kurki");
         localStorage.setItem(RIFT_KEY, String(Math.max(readRift(), 7)));
-        flash.textContent = "печь это знает. иди на кухню.";
+        flash.textContent = "печь узнала пароль. кухня открыта.";
       } else {
-        flash.textContent = "спасибо. если с вирусом — сам виноват.";
+        flash.textContent = "спасибо. если там вирус - сам виноват.";
       }
       writeNote({
         id: Date.now() + "-" + Math.random().toString(16).slice(2, 6),
@@ -423,9 +423,9 @@
         var out = document.getElementById("frombaldFlash");
         if (v === "frombald" || v === "фромбальд" || v === "frombald.") {
           keys = gainKey("frombald");
-          out.textContent = "чиновник записан. 21.07.1725. это не пароль печи. это год в счётчике.";
+          out.textContent = "чиновника записал. 21.07.1725. для печи это не пароль, зато год уже есть в счётчике.";
         } else {
-          out.textContent = "не он. в рапорте фамилия австрийца.";
+          out.textContent = "не он. ищи фамилию австрийца в рапорте.";
         }
       });
     }
@@ -505,19 +505,19 @@
       var out = document.getElementById("ovenFlash");
       if (v === "уголь") {
         keys = gainKey("coal");
-        out.textContent = "уголь в ящике. торт не из этого.";
+        out.textContent = "уголь лежит в ящике. торт пекли не из него.";
       } else if (v === "0408" || v === "04.08") {
         keys = gainKey("date");
-        out.textContent = "день принят. не хватает первого слова.";
+        out.textContent = "дата подходит. теперь не хватает первого слова.";
       } else if (v === "1725") {
         keys = gainKey("year");
-        out.textContent = "это счётчик. не печь.";
+        out.textContent = "это число из счётчика. печь ждёт другое.";
       } else if (v === "frombald" || v === "фромбальд") {
         keys = gainKey("frombald");
-        out.textContent = "чиновник не печёт.";
+        out.textContent = "чиновник составлял рапорт, а не пёк торт.";
       } else if (v === "befana" || v === "бефана") {
         keys = gainKey("befana");
-        out.textContent = "первое слово есть. второе — дата без года и точек.";
+        out.textContent = "первое слово есть. второе - дата без года и точек.";
       } else if (v === "befana-0408" || v === "бефана-0408") {
         keys = gainKey("oven");
         localStorage.setItem(RIFT_KEY, "7");
@@ -574,7 +574,7 @@
           localStorage.setItem(RIFT_KEY, "7");
           location.href = "kitchen.html";
         } else {
-          out.textContent = "это не сообщение коммита";
+          out.textContent = "нет. байты складываются не в это.";
         }
       });
     }
@@ -607,7 +607,7 @@
     var taps = 0;
     el.addEventListener("click", function () {
       taps += 1;
-      el.textContent = taps === 1 ? "plugin missing" : "файл есть. трек не тот.";
+      el.textContent = taps === 1 ? "plugin missing" : "файл на месте. играет вообще не то.";
       if (taps >= 2) keys = gainKey("voice");
     });
   });
