@@ -41,39 +41,85 @@
 html[data-page="echo"] .bio-block[data-echo="17"] .file-pre {
   margin: 12px 0;
 }
-html[data-page="echo"],
+html[data-page="echo"] {
+  background-color: #1a1024;
+}
 html[data-page="echo"] body {
   background-image: none;
-  background-color: #07070a;
+  background-color: transparent;
 }
 html[data-page="echo"] .wallpaper {
+  z-index: 0;
+  background-color: #1a1024;
   background-image: url("fonsite.png");
   background-repeat: repeat;
-  background-size: 400px 400px;
+  background-size: 220px 220px;
+  background-position: 12px -8px;
+  filter: contrast(1.35) saturate(1.4) brightness(1.25);
+}
+html[data-page="echo"] .wallpaper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("fonsite.png");
+  background-repeat: repeat;
+  background-size: 70px 280px;
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+  pointer-events: none;
+}
+html[data-page="echo"] .dir-page {
+  position: relative;
+  z-index: 1;
 }
 html[data-page="echo"][data-echo="1"] .wallpaper {
-  background-size: 310px 310px;
-  filter: contrast(1.15) saturate(0.85);
+  background-size: 160px 160px;
+  filter: contrast(1.55) saturate(1.7) brightness(1.45) hue-rotate(18deg);
+}
+html[data-page="echo"][data-echo="1"] .wallpaper::after {
+  background-size: 48px 220px;
+  mix-blend-mode: hard-light;
+  opacity: 0.7;
 }
 html[data-page="echo"][data-echo="2"] .wallpaper {
-  background-size: 220px 540px;
-  filter: contrast(1.45) saturate(0.4) brightness(0.72);
+  background-size: 90px 320px;
+  filter: contrast(1.8) saturate(0.55) brightness(0.85) hue-rotate(-40deg);
   image-rendering: pixelated;
+}
+html[data-page="echo"][data-echo="2"] .wallpaper::after {
+  background-size: 320px 40px;
+  mix-blend-mode: difference;
+  opacity: 0.35;
 }
 html[data-page="echo"][data-echo="3"] .wallpaper {
-  background-size: 640px 90px;
-  filter: grayscale(0.55) contrast(1.8) brightness(0.42) hue-rotate(200deg);
+  background-size: 480px 110px;
+  filter: contrast(2.1) saturate(0.3) brightness(1.1) hue-rotate(200deg);
   image-rendering: pixelated;
+}
+html[data-page="echo"][data-echo="3"] .wallpaper::after {
+  background-size: 24px 24px;
+  mix-blend-mode: screen;
+  opacity: 0.45;
 }
 html[data-page="echo"][data-echo="4"] .wallpaper {
-  background-size: 980px 40px;
-  filter: grayscale(0.8) contrast(2.2) brightness(0.22) hue-rotate(230deg);
+  background-size: 700px 48px;
+  filter: contrast(2.4) saturate(0.15) brightness(0.7) hue-rotate(250deg);
   image-rendering: pixelated;
 }
+html[data-page="echo"][data-echo="4"] .wallpaper::after {
+  background-size: 16px 180px;
+  mix-blend-mode: color-dodge;
+  opacity: 0.3;
+}
 html[data-page="echo"][data-echo="5"] .wallpaper {
-  background-size: 1600px 12px;
-  filter: grayscale(1) contrast(2.8) brightness(0.08);
+  background-size: 40px 40px;
+  filter: contrast(2.6) saturate(0) brightness(0.55) hue-rotate(280deg);
   image-rendering: pixelated;
+}
+html[data-page="echo"][data-echo="5"] .wallpaper::after {
+  background-size: 8px 8px;
+  mix-blend-mode: overlay;
+  opacity: 0.8;
 }
 html[data-decay="3"] .wallpaper {
   filter: contrast(1.25) saturate(0.7) brightness(0.78);
