@@ -147,11 +147,11 @@
     });
   }
 
-  var midiPlay = document.getElementById("midiPlay");
-  if (midiPlay) {
-    midiPlay.addEventListener("click", function () {
-      document.getElementById("midiMsg").textContent =
-        decay >= 3 ? "уже играет. ты просто не слышишь." : "plugin missing. нужен Winamp или QuickTime.";
+  var midiDead = document.getElementById("midiDead");
+  if (midiDead) {
+    midiDead.addEventListener("click", function () {
+      var msg = document.getElementById("midiMsg");
+      if (msg) msg.textContent = decay >= 3 ? "файл есть. трек не тот." : "Your browser does not support the audio element.";
     });
   }
 
@@ -189,8 +189,9 @@
       return extra;
     }
     function renderNotes() {
-      var all = PLANTED.concat(decayNotes(), readNotes());
-      var box = document.getElementById("guestNotes");
+      var all = decayNotes().concat(readNotes());
+      var box = document.getElementById("guestExtra") || document.getElementById("guestNotes");
+      if (!box) return;
       box.innerHTML = "";
       all.forEach(function (n) {
         var row = document.createElement("div");
