@@ -2,4 +2,7 @@ User-agent: *
 Disallow: /kisiljevo
 Disallow: /cgi-bin
 Disallow: /you
+Disallow: /kitchen
+Disallow: /cake
 # last crawl 04-Aug-2004
+# oven wants a date without a year

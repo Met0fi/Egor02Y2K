@@ -9,6 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
+<!-- 04.08 он ждал. печь спрашивает дату. не год. день и месяц. -->
 </head>
 <body>
 <div class="wallpaper" aria-hidden="true"></div>
@@ -27,10 +28,10 @@
   <p><a href="vault.html">кладбище ссылок Here.</a></p>
   <p id="oldLink" hidden><a href="old.html" data-secret="old">old</a></p>
   <div class="cat-row">
-    <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="Егор02">
-    <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="">
-    <img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%201.png" alt="">
-    <a href="old.html" data-secret="old" title="осень 2003"><img src="assets/%D0%B5%D0%B3%D0%BE%D1%80%20%D0%B0%D1%80%D1%82%202.png" alt="Егор02, осень 2003"></a>
+    <img src="assets/%D0%B5%D0%B3%D0%BEр%20арт%201.png" alt="Егор02">
+    <img src="assets/%D0%B5%D0%B3ор%20арт%201.png" alt="">
+    <img src="assets/%D0%B5%D0%B3ор%20арт%201.png" alt="">
+    <a href="old.html" data-secret="old" title="осень 2003"><img src="assets/%D0%B5%D0%B3ор%20арт%202.png" alt="Егор02, осень 2003"></a>
   </div>
   <p class="contact-line">If any info! пиши в гостевую!!!!</p>
 </div>
@@ -69,22 +70,11 @@
 <div class="gap"></div>
 <div class="dump">
   <button type="button" class="hit-wrap" id="hitCounter" title="hit counter" aria-label="счётчик посещений"><div class="hit" id="leds"></div></button>
-  <div class="midi">
-    <div>NOW PLAYING</div>
-    <div id="midiMsg">vampire.mid  (0:00 / ?:??)</div>
-    <button type="button" id="midiPlay">► play</button>
-  </div>
-  <div class="webring">
-    <strong>Vampire Pages 7/12</strong>
-    <button type="button" class="btn3d" data-ring="prev">« prev</button>
-    <button type="button" class="btn3d" data-ring="random">random</button>
-    <button type="button" class="btn3d" data-ring="next">next »</button>
-  </div>
+  <p class="on-tile" id="midiDead">vampire.mid</p>
+  <p class="on-tile" id="midiMsg">Your browser does not support the audio element.</p>
   <div class="badge-row">
     <a class="badge88 badge-gold" href="guestbook.html">SIGN
 GUESTBOOK</a>
-    <span class="badge88 badge-blood">18+
-VAMPYRE</span>
     <a class="badge88 badge-ie" href="bats.html">BAT
 FAN 2003</a>
     <a class="badge88 badge-ghost" href="cgi-bin.html" data-secret="cgi">cgi-bin</a>
@@ -92,8 +82,9 @@ FAN 2003</a>
   <pre class="file-pre dump-pre" id="listing"></pre>
 </div>
 <p class="whisper-on-tile" id="whisper" hidden></p>
+<p class="on-tile" id="kitchenHint" hidden><a href="kitchen.html">кухня</a></p>
 <p class="meet meet-end"><a href="guestbook.html">ПОДПИШИ ГОСТЕВУЮ !!!!!</a></p>
-<p class="site-foot">© 2002–2004 EGOR02 · не воровать арт · <a href="vault.html">кладбище</a><a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
+<p class="site-foot">© 2002–2004 EGOR02 · <a href="vault.html">кладбище</a><a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
 
 </body>
 </html>
