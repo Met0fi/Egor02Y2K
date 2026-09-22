@@ -1,5 +1,6 @@
 (function () {
   document.documentElement.removeAttribute("data-decay");
+  document.documentElement.setAttribute("data-echo", "0");
   var hideIds = ["whisper", "kitchenHint", "fileWander"];
   hideIds.forEach(function (id) {
     var el = document.getElementById(id);
@@ -57,6 +58,10 @@
       block.appendChild(p);
     }
     seed.parentNode.appendChild(block);
+    document.documentElement.setAttribute(
+      "data-echo",
+      n < 6 ? "1" : n < 12 ? "2" : n < 18 ? "3" : n < 25 ? "4" : "5"
+    );
     busy = false;
   }
   var guard = 0;
