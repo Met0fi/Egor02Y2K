@@ -1,6 +1,6 @@
 (function () {
   document.documentElement.removeAttribute("data-decay");
-  document.documentElement.setAttribute("data-echo", "0");
+  document.documentElement.setAttribute("data-echo", "1");
   var hideIds = ["whisper", "kitchenHint", "fileWander"];
   hideIds.forEach(function (id) {
     var el = document.getElementById(id);
