@@ -57,9 +57,6 @@
       block.appendChild(p);
     }
     seed.parentNode.appendChild(block);
-    if (n === 12) {
-      try { window.alert("не смотри так"); } catch (e2) {}
-    }
     busy = false;
   }
   var guard = 0;
