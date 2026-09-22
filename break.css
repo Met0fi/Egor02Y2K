@@ -1,3 +1,30 @@
+.dust-pic { border: 1px solid #000; background: #111; }
+.cake-full {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  z-index: 1;
+}
+.bio-block[data-echo] { margin-top: 48px; }
+.bio-block[data-echo="6"] img,
+.bio-block[data-echo="7"] img,
+.bio-block[data-echo="8"] img {
+  image-rendering: pixelated;
+  filter: contrast(1.4) saturate(1.5);
+}
+.bio-block[data-echo="9"] img,
+.bio-block[data-echo="10"] img,
+.bio-block[data-echo="11"] img,
+.bio-block[data-echo="12"] img {
+  filter: brightness(0.22) contrast(1.6) hue-rotate(210deg);
+}
+html[data-page="echo"] .bio-block[data-echo="17"] .file-pre {
+  margin: 12px 0;
+}
+
 .guest-fig { margin: 10px 0 0 0; }
 .guest-pic {
   display: block;
