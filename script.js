@@ -14,10 +14,10 @@
     {
       id: "p5",
       name: "To4hnoNeDroft",
-      text: "у меня аура этого блядского бефана. он уголь носит, не торт. торт егор пёк сам.",
+      text: "",
       date: "22.09.2026",
-      img: "guest/befana.png",
-      alt: "УГОЛЬ"
+      img: "guest/guest-aura.png",
+      alt: ""
     }
   ];
 
@@ -313,10 +313,12 @@
         who.textContent = n.name || "???";
         b.appendChild(document.createTextNode(n.date + " · "));
         b.appendChild(who);
-        var div = document.createElement("div");
-        div.textContent = n.text;
         row.appendChild(b);
-        row.appendChild(div);
+        if (n.text) {
+          var div = document.createElement("div");
+          div.textContent = n.text;
+          row.appendChild(div);
+        }
         if (n.img) {
           var fig = document.createElement("figure");
           fig.className = "guest-fig";
@@ -326,10 +328,12 @@
           im.className = "guest-pic";
           im.id = "befanaPic";
           fig.appendChild(im);
-          var cap = document.createElement("figcaption");
-          cap.className = "guest-cap";
-          cap.textContent = "подпись: " + (n.alt || "");
-          fig.appendChild(cap);
+          if (n.alt) {
+            var cap = document.createElement("figcaption");
+            cap.className = "guest-cap";
+            cap.textContent = "подпись: " + n.alt;
+            fig.appendChild(cap);
+          }
           row.appendChild(fig);
         }
         box.appendChild(row);
