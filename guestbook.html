@@ -12,7 +12,7 @@
 .guest-pic{display:block;max-width:280px;width:100%;height:auto;border:2px outset #c4c0cc;cursor:pointer;background:#c8c4d4}
 .guest-cap{font-family:"Courier New",Courier,monospace;font-size:12px;color:#5a5068;margin-top:4px}
 </style>
-<script src="script.js?v=preview4" defer></script>
+<script src="script.js?v=glaza6" defer></script>
 </head>
 <body>
 <div class="wallpaper" aria-hidden="true"></div>
@@ -47,22 +47,13 @@
     <b>22.09.2026 · <span>To4hnoNeDroft</span></b>
     <div>у меня аура этого блядского бефана. он уголь носит, не торт. торт егор пёк сам.</div>
     <figure class="guest-fig">
-      <img id="befanaPic" class="guest-pic" alt="уголь">
+      <img id="befanaPic" class="guest-pic" src="guest/befana.png" alt="уголь">
       <figcaption class="guest-cap">подпись: УГОЛЬ</figcaption>
     </figure>
   </div>
 </div>
 <div id="guestExtra"></div>
 <p class="site-foot">© 2002-2004 EGOR02 · <a href="vault.html">кладбище</a><a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
-<script>
-Promise.all([
-  fetch("guest/befana.b64a").then(function(r){return r.text();}),
-  fetch("guest/befana.b64b").then(function(r){return r.text();})
-]).then(function(p){
-  var im=document.getElementById("befanaPic");
-  if(im) im.src="data:image/jpeg;base64,"+(p[0]+p[1]).replace(/\s/g,"");
-}).catch(function(){});
-</script>
 </body>
 </html>
 

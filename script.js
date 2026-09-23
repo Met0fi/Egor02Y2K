@@ -16,7 +16,7 @@
       name: "To4hnoNeDroft",
       text: "у меня аура этого блядского бефана. он уголь носит, не торт. торт егор пёк сам.",
       date: "22.09.2026",
-      img: "guest/befana.jpg",
+      img: "guest/befana.png",
       alt: "УГОЛЬ"
     }
   ];
@@ -223,7 +223,7 @@
     ];
     if (decay >= 3 || rift >= 2) rows.push("kisiljevo.htm       21-Jul-1725   1k");
     if (decay >= 4 || rift >= 3) rows.push("you.htm             ????-??-??     0");
-    if (rift >= 1) rows.push("guest/befana.jpg    22-Sep-2026   ??");
+    if (rift >= 1) rows.push("guest/befana.png    22-Sep-2026   ??");
     if (rift >= 4) rows.push("kitchen.htm         04-Aug-2004  03:17");
     if (rift >= 2) rows.push("fangs.htm           04-Aug-2004  ?");
     if (rift >= 3) rows.push("memories.htm        ????         ");
@@ -342,25 +342,12 @@
           if (taps >= 3) {
             keys = gainKey("befana");
             var cap = pic.parentElement.querySelector("figcaption");
-            if (cap) cap.textContent = "бефана уже был. печь: cgi-bin → oven.cgi";
+            if (cap) cap.textContent = "бефана уже был. печь: cgi-bin/oven.cgi";
           }
         });
       }
     }
     renderNotes();
-    var pic = document.getElementById("befanaPic");
-    if (pic && !pic.dataset.bound) {
-      pic.dataset.bound = "1";
-      var taps = 0;
-      pic.addEventListener("click", function () {
-        taps += 1;
-        if (taps >= 3) {
-          keys = gainKey("befana");
-          var cap = pic.parentElement.querySelector("figcaption");
-          if (cap) cap.textContent = "бефана уже был. печь: cgi-bin → oven.cgi";
-        }
-      });
-    }
     guestForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var name = (guestForm.elements.name.value || "").slice(0, 32);
@@ -522,7 +509,7 @@
         keys = gainKey("oven");
         localStorage.setItem(RIFT_KEY, "7");
         location.href = "kitchen.html";
-      } else if (v === "егорвампирокурки") {
+      } else if (v === "егорвампирокурки" || v === "egrrrtl3nie") {
         keys = gainKey("kurki");
         keys = gainKey("oven");
         localStorage.setItem(RIFT_KEY, "7");
@@ -564,7 +551,7 @@
         e.preventDefault();
         var v = norm(commitForm.elements.pass.value);
         var out = document.getElementById("commitFlash");
-        if (v === "егорвампирокурки") {
+        if (v === "егорвампирокурки" || v === "egrrrtl3nie") {
           keys = gainKey("kurki");
           keys = gainKey("oven");
           localStorage.setItem(RIFT_KEY, String(Math.max(readRift(), 7)));
@@ -615,10 +602,4 @@
   rotText(document.body, readRift());
   revealFooter();
 
-  try {
-    if (rift === 0) console.info("печь не на index");
-    else if (rift < 4) console.info("hit.txt растёт сам");
-    else if (rift < 7) console.info("BEFANA-0408");
-    else console.info("свечи уже стояли");
-  } catch (e) {}
 })();

@@ -16,7 +16,25 @@
   object-fit: cover;
   border: 0;
   z-index: 1;
+  image-rendering: pixelated;
 }
+.kitchen-photo {
+  display: block;
+  width: min(320px, 100%);
+  height: auto;
+  image-rendering: pixelated;
+}
+.bat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: max-content;
+  max-width: 100%;
+  padding: 5px;
+  background: #d7d3e1;
+  border: 2px inset #9791a3;
+}
+.bat-strip img { image-rendering: pixelated; }
 .bio-block[data-echo],
 .dir-page[data-echo] { margin-top: 48px; }
 .bio-block[data-echo="6"] img,
@@ -172,7 +190,7 @@ html[data-rift="5"] body,
 html[data-rift="5"] .wallpaper { background-size: 520px 520px; }
 html[data-rift="6"] .paste p:nth-child(odd) { opacity: 0.4; }
 html[data-rift="6"] .kid-table { transform: rotate(-1.2deg); }
-html[data-rift="6"] a[href="guestbook.html"] { pointer-events: none; filter: contrast(2); }
+html[data-rift="6"] a[href="guestbook.html"] { filter: contrast(2); }
 html[data-rift="7"] .wallpaper {
   filter: grayscale(0.55) contrast(1.4);
   background-size: 640px 640px;
