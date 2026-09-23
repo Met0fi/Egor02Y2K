@@ -307,13 +307,15 @@
       all.forEach(function (n) {
         var row = document.createElement("div");
         row.className = "note-row";
-        var b = document.createElement("b");
-        var who = document.createElement("span");
-        if (!n.name) who.className = "note-empty-ink";
-        who.textContent = n.name || "???";
-        b.appendChild(document.createTextNode(n.date + " · "));
-        b.appendChild(who);
-        row.appendChild(b);
+        if (n.date || n.name) {
+          var b = document.createElement("b");
+          var who = document.createElement("span");
+          if (!n.name) who.className = "note-empty-ink";
+          who.textContent = n.name || "???";
+          b.appendChild(document.createTextNode((n.date || "") + " · "));
+          b.appendChild(who);
+          row.appendChild(b);
+        }
         if (n.text) {
           var div = document.createElement("div");
           div.textContent = n.text;
