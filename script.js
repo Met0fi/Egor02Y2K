@@ -13,9 +13,9 @@
     { id: "p4", name: "EGOR02", text: "я потом доделаю. не трогайте файлы в cgi-bin", date: "04.08.2004" },
     {
       id: "p5",
-      name: "",
+      name: "To4hnoNeDroft",
       text: "",
-      date: "",
+      date: "22.09.2026",
       img: "guest/guest-aura.png",
       alt: ""
     }
