@@ -5,7 +5,7 @@ Disallow: /you
 Disallow: /kitchen
 Disallow: /cake
 Disallow: /couldjustbite
-Disallow: /whoareyouhidingfrom
+Disallow: /badbat
 Disallow: /memories
 Disallow: /teeth
 # last crawl 04-Aug-2004
