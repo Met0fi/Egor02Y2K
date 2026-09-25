@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru" data-page="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vamprie?02</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="break.css?v=end1">
+<style>
+html,body{background:#07040a;overflow:hidden}
+.wallpaper{filter:contrast(2.4) saturate(0.2) hue-rotate(40deg);opacity:.35}
+.wreck{
+  font-family:"Times New Roman",serif;
+  color:#8a7a86;
+  font-size:13px;
+  line-height:1.35;
+  padding:18px 22px 70px;
+  max-width:420px;
+}
+.wreck p{margin:0 0 11px;transform:skewX(-2deg)}
+.wreck p:nth-child(2){letter-spacing:.18em;color:#3a3038}
+.wreck p:nth-child(3){font-size:22px;color:#2a1014}
+.wreck a{color:#4a3a44;pointer-events:none}
+.theendq{
+  position:fixed;
+  right:14px;
+  bottom:10px;
+  margin:0;
+  font-family:"Comic Sans MS","Comic Sans",cursive;
+  font-size:13px;
+  color:#c9b7a0;
+  letter-spacing:.04em;
+}
+#slice{
+  position:fixed;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
+}
+</style>
+</head>
+<body>
+<div class="wallpaper" aria-hidden="true"></div>
+<canvas id="slice"></canvas>
+<div class="wreck">
+  <p>меня зовут егор. 902 года</p>
+  <p>страничка</p>
+  <p>ег р</p>
+  <p>1725 кисилево. петар. рапорт увезли.</p>
+  <p><a href="i.html">ГОСТЕВАЯ</a></p>
+</div>
+<p class="theendq">THE END?</p>
+<script>
+(function(){
+  try{
+    localStorage.setItem("egor02_rift","8");
+    document.documentElement.dataset.rift="8";
+  }catch(e){}
+  var c=document.getElementById("slice");
+  if(!c) return;
+  var w=innerWidth,h=innerHeight;
+  c.width=w;c.height=h;
+  var x=c.getContext("2d");
+  x.fillStyle="#11060c";
+  x.fillRect(0,0,w,h);
+  for(var y=0;y<h;y+=3){
+    var g=20+(y*17)%180;
+    x.fillStyle="rgba("+(40+(y%70))+",8,16,.35)";
+    x.fillRect((y*13)%w, y, 80+(y%140), 2);
+    x.fillStyle="rgba("+g+",20,30,.25)";
+    x.fillRect(0,y,w*(.2+(y%9)/20),1);
+  }
+})();
+</script>
+</body>
+</html>

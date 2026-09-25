@@ -4,6 +4,22 @@
   var KEYS_KEY = "egor02_keys";
   var RIFT_KEY = "egor02_rift";
 
+  document.querySelectorAll('a[href="vault.html"]').forEach(function (a) {
+    a.remove();
+  });
+
+  var extra = document.getElementById("guestExtra");
+  if (extra) extra.textContent = "";
+  function scrubNotes() {
+    document.querySelectorAll(".note-row").forEach(function (row) {
+      var t = row.textContent || "";
+      if (/still fresh/i.test(t) || t.indexOf("p.b.") !== -1) row.remove();
+    });
+  }
+  scrubNotes();
+  setTimeout(scrubNotes, 60);
+  setTimeout(scrubNotes, 400);
+
   var reset = document.getElementById("resetCounter");
   if (reset && !reset.dataset.cut) {
     reset.dataset.cut = "1";
@@ -14,29 +30,6 @@
       localStorage.removeItem(RIFT_KEY);
       location.href = "index.html";
     });
-  }
-
-  if (location.pathname.indexOf("carmilla") !== -1) {
-    try {
-      var keys = JSON.parse(localStorage.getItem(KEYS_KEY) || "[]");
-      if (keys.indexOf("carmilla") === -1) {
-        keys.push("carmilla");
-        localStorage.setItem(KEYS_KEY, JSON.stringify(keys));
-        var rift = Math.min(8, Number(localStorage.getItem(RIFT_KEY) || 0) + 1);
-        localStorage.setItem(RIFT_KEY, String(rift));
-        document.documentElement.dataset.rift = String(rift);
-      }
-    } catch (e) {}
-  }
-
-  if (location.pathname.indexOf("glaza") !== -1) {
-    try {
-      var keys2 = JSON.parse(localStorage.getItem(KEYS_KEY) || "[]");
-      if (keys2.indexOf("smile") === -1) {
-        keys2.push("smile");
-        localStorage.setItem(KEYS_KEY, JSON.stringify(keys2));
-      }
-    } catch (e) {}
   }
 
   document.querySelectorAll(".guest-cap").forEach(function (cap) {
