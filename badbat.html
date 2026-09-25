@@ -6,8 +6,41 @@
 <title>Vamprie?02</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="break.css?v=bat1">
-<script src="script.js?v=bat1" defer></script>
+<link rel="stylesheet" href="break.css?v=bat2">
+<script src="script.js?v=bat2" defer></script>
+<style>
+.guts-hole{
+  position:fixed;
+  right:8%;
+  bottom:11%;
+  width:168px;
+  height:112px;
+  z-index:6;
+  opacity:0;
+  cursor:pointer;
+  overflow:hidden;
+  border:1px solid #1a0a0a;
+}
+.guts-hole:hover,.guts-hole:focus{
+  opacity:1;
+}
+.guts-hole img{
+  display:block;
+  width:168px;
+  height:112px;
+  object-fit:cover;
+  filter:contrast(1.4) saturate(.65);
+  image-rendering:pixelated;
+}
+#sortLayer{
+  position:fixed;
+  inset:0;
+  z-index:80;
+  display:none;
+  width:100%;
+  height:100%;
+}
+</style>
 </head>
 <body>
 <div class="night-grid">
@@ -19,6 +52,121 @@
   <div class="talk-gap"></div>
   <p class="talk-line"><a href="commits.html">cvs</a> · <a href="kisiljevo.html">рапорт</a></p>
 </div>
-<script>window.alert("its page ег?!!!");</script>
+<a class="guts-hole" id="gutsHole" href="i.html">
+  <img src="" id="gutsImg" alt="">
+</a>
+<canvas id="sortLayer"></canvas>
+<script>
+fetch("assets/guts.txt").then(function(r){return r.text()}).then(function(t){
+  var im=document.getElementById("gutsImg");
+  if(im) im.src="data:image/jpeg;base64,"+t.replace(/\s/g,"");
+});
+</script>
+<script>
+window.alert("its page ег?!!!");
+(function(){
+  var hole=document.getElementById("gutsHole");
+  var layer=document.getElementById("sortLayer");
+  if(!hole||!layer) return;
+  hole.addEventListener("click", function(e){
+    e.preventDefault();
+    scream();
+    sortThenGo();
+  });
+  function scream(){
+    try{
+      var ac=new (window.AudioContext||window.webkitAudioContext)();
+      var t0=ac.currentTime;
+      var dur=1.05;
+      var buf=ac.createBuffer(1, Math.floor(ac.sampleRate*dur), ac.sampleRate);
+      var d=buf.getChannelData(0);
+      for(var i=0;i<d.length;i++){
+        var t=i/ac.sampleRate;
+        var env=Math.min(1,t*20)*Math.max(0,1-(t-0.07)*1.2);
+        var sq=Math.sin(2*Math.PI*47*t)>0?1:-1;
+        var sq2=Math.sin(2*Math.PI*880*t)>0?1:-1;
+        var chirp=Math.sin(2*Math.PI*(160+t*2600)*t);
+        var n=(Math.random()*2-1);
+        var v=(sq*0.34+sq2*0.2+chirp*0.3+n*0.62)*env*2.2;
+        d[i]=v>1?1:v<-1?-1:v;
+      }
+      var src=ac.createBufferSource();
+      src.buffer=buf;
+      var gain=ac.createGain();
+      gain.gain.setValueAtTime(0.95,t0);
+      gain.gain.exponentialRampToValueAtTime(0.01,t0+dur);
+      src.connect(gain); gain.connect(ac.destination);
+      src.start(t0);
+    }catch(err){}
+  }
+  function sortThenGo(){
+    var w=Math.max(320, window.innerWidth);
+    var h=Math.max(240, window.innerHeight);
+    layer.width=w; layer.height=h;
+    layer.style.display="block";
+    var ctx=layer.getContext("2d");
+    ctx.fillStyle="#040208";
+    ctx.fillRect(0,0,w,h);
+    var imgs=document.querySelectorAll("img");
+    var pending=imgs.length||1;
+    function doneDraw(){
+      pending-=1;
+      if(pending>0) return;
+      runSort(ctx,w,h, function(){
+        setTimeout(function(){ location.href="i.html"; }, 280);
+      });
+    }
+    if(!imgs.length) doneDraw();
+    imgs.forEach(function(im, n){
+      try{
+        ctx.drawImage(im, 20+n*70, 40+n*36, im.naturalWidth?Math.min(220,im.naturalWidth):110, im.naturalHeight?Math.min(160,im.naturalHeight):90);
+      }catch(err){}
+      doneDraw();
+    });
+    ctx.fillStyle="#6a1020";
+    ctx.fillRect(0, Math.floor(h*0.42), w, 18);
+    ctx.fillStyle="#1c0810";
+    ctx.fillRect(0, Math.floor(h*0.71), w, 9);
+  }
+  function runSort(ctx,w,h, done){
+    var frame=0;
+    function step(){
+      var img=ctx.getImageData(0,0,w,h);
+      var data=img.data;
+      var thresh=40+frame*18;
+      var dir=frame%2===0;
+      for(var y=0;y<h;y+=1+((y*3)%2)){
+        sortSpan(data,y,w,thresh,dir);
+      }
+      ctx.putImageData(img,0,0);
+      frame+=1;
+      if(frame<14) requestAnimationFrame(step);
+      else done();
+    }
+    step();
+  }
+  function sortSpan(data,y,w,thresh,byLum){
+    var row=new Array(w);
+    for(var x=0;x<w;x++){
+      var i=(y*w+x)*4;
+      var l=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+      row[x]=[data[i],data[i+1],data[i+2],data[i+3],l];
+    }
+    var i=0;
+    while(i<w){
+      while(i<w && row[i][4]<thresh) i++;
+      var s=i;
+      while(i<w && row[i][4]>=thresh) i++;
+      var sl=row.slice(s,i);
+      sl.sort(function(a,b){ return byLum?a[4]-b[4]:b[4]-a[4]; });
+      for(var k=0;k<sl.length;k++) row[s+k]=sl[k];
+    }
+    for(var x=0;x<w;x++){
+      var p=(y*w+x)*4;
+      data[p]=row[x][0]; data[p+1]=row[x][1]; data[p+2]=row[x][2];
+    }
+  }
+})();
+</script>
 </body>
 </html>
