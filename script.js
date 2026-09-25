@@ -1,20 +1,10 @@
 (function(){
-  function load(i, acc){
-    if(i>3){
-      var s=document.createElement("script");
-      s.textContent=acc.join("");
-      document.head.appendChild(s);
-      return;
-    }
-    var r=new XMLHttpRequest();
-    r.open("GET","s"+i+".txt",true);
-    r.onreadystatechange=function(){
-      if(r.readyState===4){
-        acc.push(r.responseText||"");
-        load(i+1,acc);
-      }
-    };
-    r.send();
-  }
-  load(1,[]);
+  var s=document.createElement("script");
+  s.src="https://cdn.jsdelivr.net/gh/Met0fi/Egor02Y2K@3163a9e58c3370ae47b974d4a97c532902f1eaed/script.js";
+  s.onload=function(){
+    var t=document.createElement("script");
+    t.src="script-cut.js?v=cut1";
+    document.head.appendChild(t);
+  };
+  document.head.appendChild(s);
 })();
