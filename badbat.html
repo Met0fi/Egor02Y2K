@@ -77,25 +77,52 @@ window.alert("its page ег?!!!");
     try{
       var ac=new (window.AudioContext||window.webkitAudioContext)();
       var t0=ac.currentTime;
-      var dur=1.05;
-      var buf=ac.createBuffer(1, Math.floor(ac.sampleRate*dur), ac.sampleRate);
+      var sr=ac.sampleRate;
+      var dur=1.65;
+      var buf=ac.createBuffer(1, Math.floor(sr*dur), sr);
       var d=buf.getChannelData(0);
+      var lp=0;
       for(var i=0;i<d.length;i++){
-        var t=i/ac.sampleRate;
-        var env=Math.min(1,t*20)*Math.max(0,1-(t-0.07)*1.2);
-        var sq=Math.sin(2*Math.PI*47*t)>0?1:-1;
-        var sq2=Math.sin(2*Math.PI*880*t)>0?1:-1;
-        var chirp=Math.sin(2*Math.PI*(160+t*2600)*t);
-        var n=(Math.random()*2-1);
-        var v=(sq*0.34+sq2*0.2+chirp*0.3+n*0.62)*env*2.2;
+        var t=i/sr;
+        var white=Math.random()*2-1;
+        lp=lp*0.992+white*0.008;
+        var grit=white-lp;
+        var drag=Math.sin(2*Math.PI*(14+t*6)*t+Math.sin(t*37)*1.7);
+        var tooth=Math.sin(2*Math.PI*(78+Math.sin(t*5.2)*22)*t);
+        tooth=tooth>0.55?1:tooth<-0.55?-1:tooth*0.22;
+        var env=Math.min(1,t*7)*Math.max(0,1-(t-0.16)/1.48);
+        env*=0.68+0.32*Math.abs(Math.sin(2*Math.PI*t*2.8+lp*4));
+        var burst=0;
+        if((t>0.19&&t<0.38)||(t>0.67&&t<0.84)||(t>1.12&&t<1.31)){
+          burst=grit*((i%9)<3?1.1:0.35);
+        }
+        var v=(lp*1.25+grit*0.28+drag*0.2+tooth*0.16+burst)*env*1.85;
+        if(v>0.9) v=0.9+(v-0.9)*0.1;
+        if(v<-0.9) v=-0.9+(v+0.9)*0.1;
         d[i]=v>1?1:v<-1?-1:v;
       }
       var src=ac.createBufferSource();
       src.buffer=buf;
+      var bp=ac.createBiquadFilter();
+      bp.type="bandpass";
+      bp.frequency.setValueAtTime(310,t0);
+      bp.frequency.linearRampToValueAtTime(640,t0+0.55);
+      bp.frequency.linearRampToValueAtTime(220,t0+dur);
+      bp.Q.value=2.8;
+      var peak=ac.createBiquadFilter();
+      peak.type="peaking";
+      peak.frequency.value=2100;
+      peak.Q.value=5;
+      peak.gain.setValueAtTime(4.5,t0);
+      peak.gain.linearRampToValueAtTime(-3,t0+dur);
       var gain=ac.createGain();
-      gain.gain.setValueAtTime(0.95,t0);
+      gain.gain.setValueAtTime(0.0001,t0);
+      gain.gain.exponentialRampToValueAtTime(0.88,t0+0.05);
       gain.gain.exponentialRampToValueAtTime(0.01,t0+dur);
-      src.connect(gain); gain.connect(ac.destination);
+      src.connect(bp);
+      bp.connect(peak);
+      peak.connect(gain);
+      gain.connect(ac.destination);
       src.start(t0);
     }catch(err){}
   }
@@ -113,7 +140,7 @@ window.alert("its page ег?!!!");
       pending-=1;
       if(pending>0) return;
       runSort(ctx,w,h, function(){
-        setTimeout(function(){ location.href="i.html"; }, 280);
+        setTimeout(function(){ location.href="i.html"; }, 1500);
       });
     }
     if(!imgs.length) doneDraw();
