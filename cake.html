@@ -7,12 +7,29 @@
 <meta name="theme-color" content="#163a8c">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="break.css?v=glaza6">
-<script src="script.js?v=glaza6" defer></script>
+<link rel="stylesheet" href="break.css?v=cake1">
+<script src="script.js?v=cake1" defer></script>
+<style>
+html[data-page="cake"], html[data-page="cake"] body {
+  margin: 0;
+  background: #163a8c;
+  overflow: hidden;
+}
+.cake-full {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  z-index: 1;
+}
+</style>
 </head>
 <body>
-<img class="cake-full no-rot" src="assets/cake.png" alt="торт со свечами">
+<img class="cake-full no-rot" id="cakePic" alt="">
 <h1 class="cake-yell no-rot">С днём рождения Егор!</h1>
 <p class="cake-sub no-rot">01.10.????</p>
+<script src="cake-src.js?v=cake1"></script>
 </body>
 </html>
