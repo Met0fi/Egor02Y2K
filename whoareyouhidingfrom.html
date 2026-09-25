@@ -6,8 +6,16 @@
 <title>Vamprie?02</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="break.css?v=glaza6">
-<script src="script.js?v=glaza6" defer></script>
+<link rel="stylesheet" href="break.css?v=alert1">
+<script>
+(function () {
+  var real = window.alert;
+  window.alert = function (m) {
+    real(m === "nosey nosey" ? "its page ег?!!!" : m);
+  };
+})();
+</script>
+<script src="script.js?v=alert1" defer></script>
 </head>
 <body>
 <div class="night-grid">
