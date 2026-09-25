@@ -20,3 +20,11 @@
       alt: ""
     }
   ];
+
+  function decayLevel(visits) {
+    if (visits <= 1) return 0;
+    if (visits === 2) return 1;
+    if (visits <= 4) return 2;
+    if (visits <= 7) return 3;
+    return 4;
+  }
