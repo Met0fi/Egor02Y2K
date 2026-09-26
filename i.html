@@ -76,26 +76,26 @@ html,body{background:#07040a;overflow:hidden}
     played = true;
     try {
       var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var t0 = ac.currentTime;
       var sr = ac.sampleRate;
       var dur = 1.2;
       var buf = ac.createBuffer(1, Math.floor(sr * dur), sr);
-      var data = buf.getChannelData(0);
-      for (var i = 0; i < data.length; i += 1) {
+      var d = buf.getChannelData(0);
+      for (var i = 0; i < d.length; i++) {
         var t = i / sr;
         var env = Math.min(1, t * 10) * Math.max(0, 1 - t / dur);
-        data[i] = (Math.random() * 2 - 1) * env * 0.6;
+        d[i] = (Math.random() * 2 - 1) * env * 0.6;
       }
       var src = ac.createBufferSource();
-      var gain = ac.createGain();
       src.buffer = buf;
+      var gain = ac.createGain();
       gain.gain.value = 0.8;
       src.connect(gain);
       gain.connect(ac.destination);
-      src.start();
+      src.start(t0);
     } catch (e) {}
   }, { once: true });
 })();
 </script>
 </body>
 </html>
-
