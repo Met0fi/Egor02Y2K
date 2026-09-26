@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ledger.htm</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="break.css?v=ledger1">
+<script src="script.js?v=ledger1" defer></script>
+</head>
+<body>
+<div class="wallpaper" aria-hidden="true"></div>
+<main class="dir-page ledger-page">
+  <h1>ledger.htm</h1>
+  <p>четыре листа. порядок не важен. ответ в каждом листе один, но поля не подписаны.</p>
+  <div class="ledger-pages" aria-label="листы">
+    <button class="ledger-tab" type="button" data-ledger-page="1">лист 01<br><span>кисилево</span></button>
+    <button class="ledger-tab" type="button" data-ledger-page="2">лист 02<br><span>рапорт</span></button>
+    <button class="ledger-tab" type="button" data-ledger-page="3">лист 03<br><span>ящик</span></button>
+    <button class="ledger-tab" type="button" data-ledger-page="4">лист 04<br><span>день</span></button>
+  </div>
+  <p id="ledgerStatus" class="fragment">листов просмотрено: 0 из 4</p>
+  <p id="ledgerLock" class="ledger-lock">форма появится, когда четыре листа будут открыты.</p>
+  <form class="paste ledger-form" id="ledgerForm" hidden>
+    <p><label>год из рапорта<br><input name="year" inputmode="numeric" maxlength="4" autocomplete="off"></label></p>
+    <p><label>фамилия чиновника<br><input name="name" maxlength="32" autocomplete="off"></label></p>
+    <p><label>что лежало в ящике<br><input name="word" maxlength="32" autocomplete="off"></label></p>
+    <p><label>день без года<br><input name="date" maxlength="8" autocomplete="off"></label></p>
+    <p><button class="btn3d" type="submit">сверить листы</button> <span class="flash" id="ledgerFlash"></span></p>
+  </form>
+  <p id="ledgerNext" hidden><a href="commits.html">cvs снова отвечает</a></p>
+  <p><a href="index.html">index</a> · <a href="guestbook.html">guestbook</a></p>
+</main>
+</body>
+</html>
+
