@@ -275,7 +275,6 @@
   if (guestForm) {
     function decayNotes() {
       var extra = [];
-      if (decay >= 2 || rift >= 2) extra.push({ id: "d2", name: "p.b.", text: "still fresh", date: "21.07.1725" });
       if (decay >= 4 || rift >= 3) extra.push({ id: "d4", name: "", text: "окно в кухне было открыто", date: "04.08.2004" });
       if (rift >= 5) extra.push({ id: "d5", name: "печь", text: "лист без подписи. второй ответ спрятан в полосе мышей.", date: "??.??.????" });
       return extra;
