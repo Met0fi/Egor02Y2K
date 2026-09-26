@@ -314,7 +314,8 @@
 
   window.EgorFinale = { start: finale };
   var cake = document.getElementById("cakePic");
-  if (cake) cake.addEventListener("click", finale);
+  if (cake && root.dataset.page === "cake") cake.addEventListener("click", finale);
   if (root.dataset.page === "cake" && keys.indexOf("oven") === -1 && rift < 7) location.href = "kitchen.html";
 })();
+
 
