@@ -1,75 +1,41 @@
 (function () {
-  document.documentElement.removeAttribute("data-decay");
-  document.documentElement.setAttribute("data-echo", "1");
-  var hideIds = ["whisper", "kitchenHint", "fileWander"];
-  hideIds.forEach(function (id) {
-    var el = document.getElementById(id);
-    if (el) el.hidden = true;
-  });
-
-  function accept(v) {
-    v = String(v || "").trim().toLowerCase().replace(/\s+/g, "");
-    return v === "egrrrtl3nie" || v === "егорвампирокурки";
-  }
-  function openKitchen() {
-    try {
-      var keys = JSON.parse(localStorage.getItem("egor02_keys") || "[]");
-      if (keys.indexOf("oven") === -1) keys.push("oven");
-      if (keys.indexOf("kurki") === -1) keys.push("kurki");
-      localStorage.setItem("egor02_keys", JSON.stringify(keys));
-      localStorage.setItem("egor02_rift", "7");
-    } catch (e) {}
-    location.href = "kitchen.html";
-  }
-  ["commitForm", "ovenForm"].forEach(function (id) {
-    var form = document.getElementById(id);
-    if (!form) return;
-    form.addEventListener("submit", function (e) {
-      var box = form.elements.pass;
-      if (box && accept(box.value)) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        openKitchen();
-      }
-    }, true);
-  });
-
-  if (location.pathname.indexOf("glaza") === -1 && location.pathname.indexOf("couldjustbite") === -1) return;
+  "use strict";
   var seed = document.getElementById("echoSeed");
   if (!seed) return;
-  var n = 0;
-  var busy = false;
-  function copy() {
-    if (n >= 36 || busy) return;
-    busy = true;
-    n += 1;
+  var count = 0;
+  var clues = [
+    "зеркало не копирует текст. оно копирует порядок.",
+    "два байта на букву. читай не сверху вниз, а по времени.",
+    "04.08.2004 03:17 — это дверь, не дата рождения.",
+    "у печи два слова. одно приносит уголь, второе открывает ночь."
+  ];
+  function addEcho() {
+    if (count >= 8) return;
+    count += 1;
     var block = seed.cloneNode(true);
     block.removeAttribute("id");
-    block.setAttribute("data-echo", String(n));
-    if (n === 17) {
-      var scrap = document.createElement("pre");
-      scrap.className = "file-pre";
-      scrap.textContent = "01000101 01100111 01110010 01110010\n01110010 01010100 01101100 00110011";
-      block.appendChild(scrap);
+    block.dataset.echo = String(count);
+    if (clues[count - 1]) {
+      var note = document.createElement("p");
+      note.className = "file-pre";
+      note.textContent = clues[count - 1];
+      block.appendChild(note);
     }
-    if (n === 28) {
-      var p = document.createElement("p");
-      p.innerHTML = '<a href="commits.html">cvs</a>';
-      block.appendChild(p);
+    if (count === 6) {
+      var link = document.createElement("p");
+      link.innerHTML = '<a href="commits.html">открыть cvs</a>';
+      block.appendChild(link);
+    }
+    if (count === 8) {
+      var finalLink = document.createElement("p");
+      finalLink.innerHTML = '<a href="kitchen.html">дальше — печь</a>';
+      block.appendChild(finalLink);
     }
     seed.parentNode.appendChild(block);
-    document.documentElement.setAttribute(
-      "data-echo",
-      n < 6 ? "1" : n < 12 ? "2" : n < 18 ? "3" : n < 25 ? "4" : "5"
-    );
-    busy = false;
+    document.documentElement.dataset.echo = count < 3 ? "1" : count < 6 ? "2" : "3";
   }
-  var guard = 0;
-  while (n < 36 && guard < 8 && document.documentElement.scrollHeight < window.innerHeight + 160) {
-    copy();
-    guard += 1;
-  }
+  for (var initial = 0; initial < 2; initial += 1) addEcho();
   window.addEventListener("scroll", function () {
-    if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 280) copy();
+    if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 240) addEcho();
   });
 })();
