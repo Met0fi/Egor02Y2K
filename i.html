@@ -69,6 +69,33 @@ html,body{background:#07040a;overflow:hidden}
     x.fillRect(0,y,w*(.2+(y%9)/20),1);
   }
 })();
+(function(){
+  var played = false;
+  document.addEventListener("click", function () {
+    if (played) return;
+    played = true;
+    try {
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var sr = ac.sampleRate;
+      var dur = 1.2;
+      var buf = ac.createBuffer(1, Math.floor(sr * dur), sr);
+      var data = buf.getChannelData(0);
+      for (var i = 0; i < data.length; i += 1) {
+        var t = i / sr;
+        var env = Math.min(1, t * 10) * Math.max(0, 1 - t / dur);
+        data[i] = (Math.random() * 2 - 1) * env * 0.6;
+      }
+      var src = ac.createBufferSource();
+      var gain = ac.createGain();
+      src.buffer = buf;
+      gain.gain.value = 0.8;
+      src.connect(gain);
+      gain.connect(ac.destination);
+      src.start();
+    } catch (e) {}
+  }, { once: true });
+})();
 </script>
 </body>
 </html>
+

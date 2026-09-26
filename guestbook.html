@@ -50,8 +50,31 @@
   </div>
 </div>
 <div id="guestExtra"></div>
+<div id="kittyGate" hidden>
+  <form class="paste" id="kittyForm">
+    <p>ты знаешь имя?</p>
+    <p><input name="k" maxlength="16" autocomplete="off"></p>
+    <p><button class="btn3d" type="submit">ок</button></p>
+  </form>
+</div>
 <p class="site-foot">© 2002-2004 EGOR02<a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
+<script>
+(function () {
+  var nameInput = document.querySelector('input[name="name"]');
+  var gate = document.getElementById("kittyGate");
+  var form = document.getElementById("kittyForm");
+  if (!nameInput || !gate || !form) return;
+  nameInput.addEventListener("input", function () {
+    gate.hidden = this.value.toLowerCase().indexOf("kitty666") === -1;
+  });
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    location.href = "permission.html";
+  });
+})();
+</script>
 </body>
 </html>
+
 
 

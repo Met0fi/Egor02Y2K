@@ -69,7 +69,7 @@
 
   function readRift() {
     var n = Number(localStorage.getItem(RIFT_KEY) || 0);
-    return Number.isFinite(n) ? Math.max(0, Math.min(8, n)) : 0;
+    return Number.isFinite(n) ? Math.max(0, Math.min(9, n)) : 0;
   }
 
   function gainKey(id) {
@@ -77,7 +77,7 @@
     if (keys.indexOf(id) !== -1) return keys;
     keys.push(id);
     localStorage.setItem(KEYS_KEY, JSON.stringify(keys));
-    var rift = Math.min(8, readRift() + 1);
+    var rift = Math.min(9, readRift() + 1);
     localStorage.setItem(RIFT_KEY, String(rift));
     document.documentElement.dataset.rift = String(rift);
     return keys;
@@ -458,6 +458,7 @@
     keys = gainKey("cgi");
     var reset = document.getElementById("resetCounter");
     if (reset) {
+      reset.dataset.cut = "1";
       reset.addEventListener("click", function () {
         localStorage.removeItem(VISIT_KEY);
         localStorage.removeItem(SECRET_KEY);
@@ -643,5 +644,18 @@
   revealFooter();
 
 })();
+
+(function loadLocalAddons() {
+  function load(src, id) {
+    if (document.getElementById(id)) return;
+    var script = document.createElement("script");
+    script.id = id;
+    script.src = src;
+    document.head.appendChild(script);
+  }
+  load("console.js?v=2", "egorConsole");
+  load("script-cut.js?v=4", "egorCut");
+})();
+
 
 
