@@ -9,12 +9,14 @@
     .catch(function () {
       image.alt = "торт не загрузился";
     });
-  image.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      if (window.EgorFinale) window.EgorFinale.start();
-    }
-  });
-  image.tabIndex = 0;
+  if (document.documentElement.dataset.page === "cake") {
+    image.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        if (window.EgorFinale) window.EgorFinale.start();
+      }
+    });
+    image.tabIndex = 0;
+  }
 })();
 
