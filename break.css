@@ -332,3 +332,93 @@ html[data-page="cake"] body {
   font-size: 13px;
   text-align: center;
 }
+
+.ledger-pages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 16px 0;
+}
+.ledger-tab {
+  min-height: 72px;
+  padding: 8px;
+  border: 3px outset #eee;
+  background: #d4d4dc;
+  color: #2c2838;
+  font-family: var(--font-tahoma);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+.ledger-tab span { font-family: var(--font-courier); font-size: 11px; }
+.ledger-tab.read { border-style: inset; background: #c4d6ee; }
+.ledger-form input { width: min(260px, 80vw); }
+.ledger-lock { color: #6a7eb8; font-family: var(--font-courier); font-size: 12px; }
+
+.cake-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.cake-glyphs {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  color: #ef1d2d;
+  font-family: var(--font-courier);
+  font-size: clamp(18px, 4vw, 48px);
+  pointer-events: none;
+}
+.cake-glyph { position: absolute; text-shadow: 2px 0 #000; }
+.worm-censor {
+  position: absolute;
+  display: block;
+  height: 1.2em;
+  overflow: hidden;
+  background: #050505;
+  color: #050505;
+  box-shadow: 0 0 0 2px #ef1d2d;
+}
+.cake-permissions {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+.permission-card {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: min(340px, calc(100vw - 24px));
+  transform: translateX(-50%);
+  padding: 12px;
+  border: 3px outset #eee;
+  background: #d4d4dc;
+  color: #111;
+  font-family: var(--font-tahoma);
+  font-size: 13px;
+  pointer-events: auto;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, .55);
+}
+.permission-card p { margin: 8px 0; }
+.permission-actions { display: flex; gap: 8px; }
+.cake-sound {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 9;
+  font-size: 11px;
+}
+html[data-final="1"] .cake-full { filter: saturate(.65) contrast(1.35) brightness(.72); }
+html[data-final="1"] .cake-yell, html[data-final="1"] .cake-sub { display: none; }
+@media (max-width: 480px) {
+  .ledger-pages { grid-template-columns: 1fr; }
+}
+
+
