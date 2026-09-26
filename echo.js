@@ -51,9 +51,9 @@
       scrap.className = "file-pre";
       scrap.textContent = "01000101 01100111 01110010 01110010\n01110010 01010100 01101100 00110011";
       block.appendChild(scrap);
-      var permissionLink = document.createElement("p");
-      permissionLink.innerHTML = '<a href="permission.html" style="color:#8a1020">разрешить?</a>';
-      block.appendChild(permissionLink);
+      var lnk = document.createElement("p");
+      lnk.innerHTML = '<a href="permission.html" style="color:#8a1020">разрешить?</a>';
+      block.appendChild(lnk);
     }
     if (n === 28) {
       var p = document.createElement("p");
@@ -76,4 +76,3 @@
     if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 280) copy();
   });
 })();
-
