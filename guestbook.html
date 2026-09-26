@@ -44,9 +44,15 @@
     <div>я потом доделаю. не трогайте файлы в cgi-bin</div>
   </div>
   <div class="note-row">
+    <b>22.09.2026 · <span>To4hnoNeDroft</span></b>
+    <div>у меня аура этого блядского бефана. он уголь носит, не торт. торт егор пёк сам.</div>
     <figure class="guest-fig">
       <img id="befanaPic" class="guest-pic" src="guest/guest-aura.png" alt="">
     </figure>
+  </div>
+  <div class="note-row">
+    <b>21.07.1725 · <span>p.b.</span></b>
+    <div>still fresh</div>
   </div>
 </div>
 <div id="guestExtra"></div>
@@ -59,22 +65,20 @@
 </div>
 <p class="site-foot">© 2002-2004 EGOR02<a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
 <script>
-(function () {
+(function(){
   var nameInput = document.querySelector('input[name="name"]');
-  var gate = document.getElementById("kittyGate");
-  var form = document.getElementById("kittyForm");
-  if (!nameInput || !gate || !form) return;
-  nameInput.addEventListener("input", function () {
-    gate.hidden = this.value.toLowerCase().indexOf("kitty666") === -1;
+  if (!nameInput) return;
+  nameInput.addEventListener("input", function(){
+    if (this.value.toLowerCase().indexOf("kitty666") !== -1) {
+      document.getElementById("kittyGate").hidden = false;
+    }
   });
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  var f = document.getElementById("kittyForm");
+  if (f) f.addEventListener("submit", function(e){
+    e.preventDefault();
     location.href = "permission.html";
   });
 })();
 </script>
 </body>
 </html>
-
-
-
