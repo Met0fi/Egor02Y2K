@@ -421,4 +421,40 @@ html[data-final="1"] .cake-yell, html[data-final="1"] .cake-sub { display: none;
   .ledger-pages { grid-template-columns: 1fr; }
 }
 
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, -1px); }
+  50% { transform: translate(-2px, 1px); }
+  75% { transform: translate(1px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+html[data-rift="9"] body {
+  animation: shake 0.18s infinite;
+  filter: invert(1) hue-rotate(180deg) contrast(1.6);
+}
+html[data-rift="9"] .wallpaper {
+  filter: invert(1) grayscale(1) contrast(3);
+  background-size: 24px 24px;
+  image-rendering: pixelated;
+}
+html[data-rift="9"] .dir-page,
+html[data-rift="9"] .bare-page {
+  background: #000;
+  color: #c994a0;
+  border-color: #8a1020;
+}
+html[data-rift="9"] a { color: #ff2a4a; }
+
+.perm-result {
+  margin: 12px 0;
+  padding: 8px 10px;
+  border-left: 4px solid #6a7eb8;
+  font-family: var(--font-courier);
+  font-size: 13px;
+}
+.perm-result.ok { border-left-color: #9db8b4; }
+.perm-result.fail { border-left-color: #c994a0; }
+
+
 
