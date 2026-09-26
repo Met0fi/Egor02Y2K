@@ -125,7 +125,6 @@
 
   function dismiss(card) {
     card.remove();
-    schedulePermission();
   }
 
   function showPermission() {
@@ -155,6 +154,7 @@
     card.appendChild(copy);
     card.appendChild(actions);
     permissions.appendChild(card);
+    schedulePermission();
   }
 
   function schedulePermission() {
