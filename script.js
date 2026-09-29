@@ -296,6 +296,12 @@
   function plantGifs() {
     if (document.getElementById("egifLayer")) return;
     if (root.dataset.page === "cake") return;
+    if (!document.querySelector('link[href="egif.css"]')) {
+      var sheet = document.createElement("link");
+      sheet.rel = "stylesheet";
+      sheet.href = "egif.css";
+      document.head.appendChild(sheet);
+    }
     var layer = document.createElement("div");
     layer.id = "egifLayer";
     layer.setAttribute("aria-hidden", "true");
