@@ -1,0 +1,73 @@
+#egifLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.egif {
+  position: absolute;
+  image-rendering: pixelated;
+}
+.egif-star { top: 6px; left: 6px; width: 13px; height: 13px; }
+.egif-drip { top: 0; left: 22%; width: 10px; height: 28px; }
+.egif-bat { top: 34px; right: 8px; width: 32px; height: 20px; }
+.egif-candle { top: 44%; right: 8px; width: 9px; height: 18px; }
+.egif-mail { right: 10px; bottom: 48px; width: 24px; height: 16px; }
+.egif-wait { left: 8px; bottom: 14px; width: 88px; height: 12px; opacity: 0.82; }
+
+html[data-decay="2"] .egif { filter: contrast(1.15) saturate(0.85); }
+html[data-decay="3"] .egif { filter: contrast(1.35) saturate(0.55) brightness(0.88); }
+html[data-decay="4"] .egif {
+  filter: grayscale(0.35) contrast(1.55) brightness(0.7) hue-rotate(16deg);
+}
+html[data-decay="4"] .egif-star { opacity: 0.35; }
+
+html[data-rift="1"] .egif-bat { filter: contrast(1.2); }
+html[data-rift="2"] .egif { filter: saturate(0.7) contrast(1.2); }
+html[data-rift="3"] .egif-drip { opacity: 0.55; filter: hue-rotate(20deg); }
+html[data-rift="3"] .egif-wait { filter: grayscale(0.4) contrast(1.4); }
+html[data-rift="4"] .egif {
+  filter: contrast(1.6) saturate(0.45) hue-rotate(28deg);
+}
+html[data-rift="4"] .egif-bat {
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 60% 100%, 0 85%);
+}
+html[data-rift="5"] .egif {
+  filter: grayscale(0.5) contrast(1.7) brightness(0.75);
+}
+html[data-rift="5"] .egif-mail { opacity: 0.3; }
+html[data-rift="5"] .egif-candle { filter: brightness(0.45) hue-rotate(40deg); }
+html[data-rift="6"] .egif {
+  filter: grayscale(0.7) contrast(2) hue-rotate(50deg);
+  opacity: 0.45;
+}
+html[data-rift="6"] .egif-wait { display: none; }
+html[data-rift="6"] .egif-star { mix-blend-mode: difference; }
+html[data-rift="7"] .egif {
+  filter: grayscale(0.85) contrast(2.2) brightness(0.5);
+  opacity: 0.28;
+}
+html[data-rift="7"] .egif-mail,
+html[data-rift="7"] .egif-wait { display: none; }
+html[data-rift="8"] .egif {
+  filter: invert(0.8) hue-rotate(90deg) contrast(2);
+  opacity: 0.22;
+}
+html[data-rift="8"] .egif-candle,
+html[data-rift="8"] .egif-wait,
+html[data-rift="8"] .egif-mail { display: none; }
+html[data-rift="8"] .egif-bat {
+  clip-path: polygon(0 20%, 80% 0, 100% 40%, 40% 100%, 0 70%);
+}
+
+html.fractured .egif {
+  filter: grayscale(1) contrast(3) hue-rotate(300deg);
+  opacity: 0.18;
+}
+
+@media (max-width: 560px) {
+  .egif-wait,
+  .egif-mail { display: none; }
+  .egif-candle { top: auto; bottom: 72px; }
+  .egif-bat { top: 30px; right: 4px; }
+}
