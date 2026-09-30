@@ -91,14 +91,10 @@
         leds.appendChild(led);
       });
     }
-    var taps = 0;
     counter.addEventListener("click", function () {
-      taps += 1;
-      if (taps >= 5) {
-        gain("counter");
-        secret("counter");
-        location.href = "log.html";
-      }
+      gain("counter");
+      secret("counter");
+      location.href = "log.html";
     });
   }
 
@@ -180,7 +176,7 @@
       event.preventDefault();
       var value = normalize(form.elements.pass && form.elements.pass.value);
       var output = document.getElementById(outputId);
-      if (value === "бефана0408" || value === "befana0408") {
+      if (value === "бефана6" || value === "befana6") {
         gain("oven");
         riftUp(7);
         location.href = "kitchen.html";
@@ -243,8 +239,8 @@
     var sheets = new Set();
     var sheetText = {
       "1": "1725. Петар Благоевич. Кисилево.",
-      "2": "Рапорт составлял Фромбальд. Его имя не часть пароля.",
-      "3": "Бефана приносит уголь. Это содержимое ящика, не торта.",
+      "2": "Рапорт составлял Фромбальд.",
+      "3": "Бефана приносит уголь.",
       "4": "04.08.2004. На печи оставили только день и месяц."
     };
     document.querySelectorAll("[data-ledger-page]").forEach(function (tab) {
@@ -253,15 +249,12 @@
         tab.setAttribute("aria-pressed", "true");
         document.getElementById("ledgerStatus").textContent = "листов просмотрено: " + sheets.size + " из 4";
         document.getElementById("ledgerScrap").textContent = sheetText[tab.dataset.ledgerPage];
-        document.getElementById("ledgerLock").hidden = sheets.size === 4;
-        ledger.hidden = sheets.size !== 4;
       });
     });
     ledger.addEventListener("submit", function (event) {
       event.preventDefault();
-      var values = ["year", "name", "word", "date"].map(function (field) { return normalize(ledger.elements[field].value); });
-      var correct = values[0] === "1725" && (values[1] === "фромбальд" || values[1] === "frombald") &&
-        (values[2] === "уголь" || values[2] === "coal") && values[3] === "0408";
+      var values = ["year", "name"].map(function (field) { return normalize(ledger.elements[field].value); });
+      var correct = values[0] === "1725" && (values[1] === "фромбальд" || values[1] === "frombald");
       document.getElementById("ledgerFlash").textContent = correct ? "сходится." : "один из листов не сходится.";
       if (correct) { gain("ledger"); document.getElementById("ledgerNext").hidden = false; }
     });
@@ -289,6 +282,8 @@
       gain("cake");
       riftUp(8);
       try { localStorage.setItem("egor02_finale", "1"); } catch (error) {}
+      var credit = document.getElementById("cakeCredit");
+      if (credit) credit.hidden = false;
       window.startFracture(true);
     });
   }
@@ -322,9 +317,18 @@
       img.style.cssText = "position:absolute;image-rendering:pixelated;" + item[2];
       layer.appendChild(img);
     });
+    var worm = layer.querySelector(".egif-worm");
+    if (worm) {
+      ["egif-worm-two", "egif-worm-three"].forEach(function (name) {
+        var clone = worm.cloneNode(true);
+        clone.className = "egif " + name;
+        layer.appendChild(clone);
+      });
+    }
     document.body.appendChild(layer);
   }
 
   plantGifs();
   if (number("egor02_finale") === 1) window.startFracture(false);
 })();
+
