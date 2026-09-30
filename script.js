@@ -290,7 +290,6 @@
 
   function plantGifs() {
     if (document.getElementById("egifLayer")) return;
-    if (root.dataset.page === "cake") return;
     if (!document.querySelector('link[href="egif.css"]')) {
       var sheet = document.createElement("link");
       sheet.rel = "stylesheet";
@@ -328,6 +327,31 @@
     document.body.appendChild(layer);
   }
 
+  function bindRedirectScare() {
+    document.addEventListener("click", function (event) {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      var link = event.target.closest && event.target.closest("a[href]");
+      if (!link || link.target === "_blank" || link.hasAttribute("download") || link.classList.contains("guts-hole")) return;
+      var href = link.getAttribute("href");
+      if (!href || href.charAt(0) === "#") return;
+      var destination;
+      try { destination = new URL(href, location.href); } catch (error) { return; }
+      if (destination.origin !== location.origin || (destination.pathname === location.pathname && destination.search === location.search && destination.hash === location.hash)) return;
+      if (Math.random() > 0.13) return;
+      event.preventDefault();
+      var scare = document.createElement("img");
+      scare.className = "redirect-scare";
+      scare.src = "assets/bezim.png";
+      scare.alt = "";
+      scare.setAttribute("aria-hidden", "true");
+      document.body.appendChild(scare);
+      window.setTimeout(function () {
+        location.assign(destination.href);
+      }, 100);
+    }, true);
+  }
+
+  bindRedirectScare();
   plantGifs();
   if (number("egor02_finale") === 1) window.startFracture(false);
 })();
