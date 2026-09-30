@@ -56,7 +56,7 @@
 <a class="guts-hole" id="gutsHole" href="i.html">
   <img src="" id="gutsImg" alt="">
 </a>
-<audio id="gutsSound" preload="auto"></audio>
+<audio id="gutsSound" src="assets/Kishkinashatie.mp3" preload="auto"></audio>
 <canvas id="sortLayer"></canvas>
 <script>
 fetch("assets/guts.txt").then(function(r){return r.text()}).then(function(t){
@@ -70,7 +70,6 @@ fetch("assets/guts.txt").then(function(r){return r.text()}).then(function(t){
   var layer=document.getElementById("sortLayer");
   var sound=document.getElementById("gutsSound");
   if(!hole||!layer) return;
-  fetch("assets/Kishkinashatie.mp3.b64").then(function(r){return r.text()}).then(function(t){ if(sound) sound.src="data:audio/mpeg;base64,"+t.replace(/\s/g,""); });
   hole.addEventListener("click", function(e){
     e.preventDefault();
     if(sound){ sound.currentTime=0; sound.play().catch(function(){}); }
