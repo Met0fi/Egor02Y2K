@@ -27,6 +27,14 @@
     return Number.isFinite(value) ? value : 0;
   }
 
+  function sessionValue(key) {
+    try { return sessionStorage.getItem(key) || ""; } catch (error) { return ""; }
+  }
+
+  function sessionSet(key, value) {
+    try { sessionStorage.setItem(key, value); } catch (error) {}
+  }
+
   function normalize(value) {
     return String(value || "").toLowerCase().trim().replace(/ё/g, "е").replace(/[\s.\-]/g, "");
   }
@@ -74,6 +82,16 @@
       var dot = document.getElementById("footDot");
       if (dot && secrets.length >= 3) dot.hidden = false;
     });
+  });
+
+  var cvsFromBadbat = document.getElementById("cvsFromBadbat");
+  if (cvsFromBadbat) cvsFromBadbat.addEventListener("click", function () {
+    sessionSet("egor02_cvs_seen", "1");
+  });
+
+  var cgiEntry = document.getElementById("cgiEntry");
+  if (cgiEntry) cgiEntry.addEventListener("click", function () {
+    sessionSet("egor02_cgi_ready", "1");
   });
 
   var oldLink = document.getElementById("oldLink");
@@ -154,10 +172,6 @@
       } else if (code === "0408" || code === "04082004") {
         gain("date");
         if (flash) flash.textContent = "день верный. год можно оставить за дверью.";
-      } else if (code === "егорвампирокурки" || code === "egrrrtl3nie") {
-        gain("oven");
-        riftUp(7);
-        if (flash) flash.textContent = "печь услышала. кухня открыта.";
       } else if (flash) {
         flash.textContent = "запись приклеена.";
       }
@@ -176,17 +190,17 @@
       event.preventDefault();
       var value = normalize(form.elements.pass && form.elements.pass.value);
       var output = document.getElementById(outputId);
-      if (value === "бефана6" || value === "befana6") {
+      if (id === "ovenForm" && (value === "бефана6" || value === "befana6")) {
         gain("oven");
         riftUp(7);
+        sessionSet("egor02_befana6", "1");
         location.href = "kitchen.html";
         return;
       }
-      if (value === "егорвампирокурки" || value === "egrrrtl3nie") {
-        gain("oven");
-        gain("kurki");
-        riftUp(7);
-        location.href = "kitchen.html";
+      if (id === "commitForm" && (value === "егорвампирокурки" || value === "egrrrtl3nie")) {
+        sessionSet("egor02_wrong_route", "1");
+        window.alert("...!!! Стремление к цели привело тебя не туда");
+        location.replace("wrong.html");
         return;
       }
       if (value === "уголь" || value === "coal") gain("coal");
@@ -200,6 +214,21 @@
   bindPassword("ovenForm", "ovenFlash");
   bindPassword("commitForm", "commitFlash");
 
+  if (path.indexOf("cgi-bin") !== -1) {
+    var cgiAllowed = sessionValue("egor02_cvs_seen") === "1" && sessionValue("egor02_cgi_ready") === "1";
+    if (!cgiAllowed) {
+      location.replace("index.html");
+    } else {
+      sessionSet("egor02_cgi_console", "1");
+      window.alert("Вы открыли консоль CGI-BIN. Привет, Егор!");
+      location.replace("commits.html");
+    }
+  }
+
+  if (path.indexOf("commits.html") !== -1 && sessionValue("egor02_cgi_console") !== "1") {
+    location.replace("index.html");
+  }
+
   if (path.indexOf("kisiljevo") !== -1) {
     gain("kisil");
     secret("kisiljevo");
@@ -207,7 +236,7 @@
     if (again && (decay >= 2 || rift >= 2)) again.hidden = false;
   }
   if (path.indexOf("old.html") !== -1) { gain("old"); secret("old"); }
-  if (path.indexOf("cgi-bin") !== -1) { gain("cgi"); secret("cgi"); }
+  if (path.indexOf("cgi-bin") !== -1) { secret("cgi"); }
   if (path.indexOf("fangs") !== -1) gain("fangs");
   if (path.indexOf("bats") !== -1) gain("bats");
   if (path.indexOf("glaza") !== -1) gain("glaza");
@@ -269,7 +298,7 @@
   if (path.indexOf("kitchen") !== -1) {
     var gate = document.getElementById("kitchenGate");
     var room = document.getElementById("kitchenRoom");
-    var unlocked = keys.indexOf("oven") !== -1 || rift >= 7;
+    var unlocked = sessionValue("egor02_befana6") === "1";
     if (gate) gate.hidden = unlocked;
     if (room) room.hidden = !unlocked;
     if (unlocked) gain("kitchen");
@@ -277,7 +306,7 @@
 
   var cake = document.getElementById("cakeButton");
   if (cake && root.dataset.page === "cake") {
-    if (keys.indexOf("oven") === -1 && rift < 7) location.replace("kitchen.html");
+    if (sessionValue("egor02_befana6") !== "1") location.replace("kitchen.html");
     cake.addEventListener("click", function () {
       gain("cake");
       riftUp(8);
