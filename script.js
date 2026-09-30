@@ -362,6 +362,16 @@
     document.body.appendChild(layer);
   }
 
+  function clearRedirectScare() {
+    document.querySelectorAll(".redirect-scare").forEach(function (element) {
+      element.remove();
+    });
+  }
+
+  clearRedirectScare();
+  window.addEventListener("pageshow", clearRedirectScare);
+  window.addEventListener("pagehide", clearRedirectScare);
+
   function bindRedirectScare() {
     var scareSource = new Image();
     scareSource.src = "assets/bezim.png";
