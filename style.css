@@ -60,6 +60,7 @@ body,
   background-image: url("fonsite.png");
   background-repeat: repeat;
   background-size: 400px 400px;
+  image-rendering: pixelated;
 }
 
 .wallpaper {
@@ -67,6 +68,7 @@ body,
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  image-rendering: pixelated;
 }
 
 a {
@@ -825,8 +827,8 @@ html[data-decay="4"] .gone-later {
 }
 
 .ck-bar img {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 2px solid var(--color-header-ink);
   background: var(--color-dusk);
   flex-shrink: 0;
@@ -881,25 +883,25 @@ html[data-decay="4"] .gone-later {
 }
 
 .cat-row img {
-  width: 92px;
-  height: 92px;
+  width: 108px;
+  height: 108px;
   border: 2px solid #000;
   background: var(--color-dusk);
 }
 
 .cat-row img:nth-child(2) {
-  width: 78px;
-  height: 78px;
+  width: 92px;
+  height: 92px;
 }
 
 .cat-row img:nth-child(3) {
-  width: 104px;
-  height: 104px;
+  width: 122px;
+  height: 122px;
 }
 
 .cat-row a img {
-  width: 100px;
-  height: 100px;
+  width: 116px;
+  height: 116px;
 }
 
 .cat-row a:hover {
@@ -1136,8 +1138,8 @@ html[data-decay="4"] .gone-later {
   .cat-row img:nth-child(2),
   .cat-row img:nth-child(3),
   .cat-row a img {
-    width: 84px;
-    height: 84px;
+    width: 96px;
+    height: 96px;
   }
 
   .on-tile,
