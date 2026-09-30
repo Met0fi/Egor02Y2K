@@ -220,13 +220,19 @@
       location.replace("index.html");
     } else {
       sessionSet("egor02_cgi_console", "1");
+      sessionSet("egor02_cvs_seen", "0");
+      sessionSet("egor02_cgi_ready", "0");
       window.alert("Вы открыли консоль CGI-BIN. Привет, Егор!");
       location.replace("commits.html");
     }
   }
 
-  if (path.indexOf("commits.html") !== -1 && sessionValue("egor02_cgi_console") !== "1") {
-    location.replace("index.html");
+  if (path.indexOf("commits.html") !== -1) {
+    if (sessionValue("egor02_cgi_console") !== "1") {
+      location.replace("index.html");
+    } else {
+      sessionSet("egor02_cgi_console", "0");
+    }
   }
 
   if (path.indexOf("kisiljevo") !== -1) {
