@@ -317,6 +317,19 @@ html[data-page="cake"] body {
   font-size: 13px;
   text-align: center;
 }
+.cake-credit {
+  position: fixed;
+  left: 22px;
+  top: 45%;
+  z-index: 4;
+  margin: 0;
+  color: #fff4c8;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 18px;
+  letter-spacing: .34em;
+  text-align: left;
+  text-shadow: 2px 2px 0 #000;
+}
 
 @keyframes shake {
   0% { transform: translate(0,0); }
@@ -407,3 +420,4 @@ html[data-page="cake"] #fractureNoise { opacity: .92; mix-blend-mode: normal; }
 @media (prefers-reduced-motion: reduce) {
   .fracture-shift main, .fracture-shift .paste, .fracture-shift .dir-page { transform: none; text-shadow: none; }
 }
+
