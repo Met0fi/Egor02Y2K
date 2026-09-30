@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" data-page="bare">
+<html lang="ru" data-page="permission">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,49 +11,35 @@
 <script src="script.js?v=2" defer></script>
 </head>
 <body>
-<div class="wallpaper" aria-hidden="true"></div>
-<main class="bare-page" id="permRoot">
-  <h1>403 Forbidden</h1>
-  <p>Дай..</p>
-  <p>ДАЙ.. <a href="oven.html">не всю.</a></p>
-  <p><a href="commits.html">журнал</a> · <a href="index.html">index</a></p>
-  <p><button class="btn3d" id="askGeo">геолокация</button></p>
-  <p><button class="btn3d" id="askNotify">уведомления</button></p>
-  <p><button class="btn3d" id="askClip">буфер</button></p>
-  <p id="permResult" class="perm-result"></p>
-</main>
+<main class="permission-stage" id="permissionStage" hidden></main>
 <script>
 (function () {
-  function show(msg) {
-    var el = document.getElementById("permResult");
-    if (el) el.textContent = msg;
+  var stage = document.getElementById("permissionStage");
+  var special = new URLSearchParams(location.search).get("burst") === "1";
+  if (!stage || !special) return;
+  stage.hidden = false;
+  var pulse = document.createElement("div");
+  pulse.className = "permission-pulse";
+  pulse.textContent = "ДАЙ...";
+  stage.appendChild(pulse);
+  function ask() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function () {}, function () {});
+    }
+    if (window.Notification && Notification.permission === "default") {
+      Notification.requestPermission().catch(function () {});
+    }
+    if (navigator.clipboard && navigator.clipboard.readText) {
+      navigator.clipboard.readText().catch(function () {});
+    }
   }
-
-  document.getElementById("askGeo").addEventListener("click", function () {
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(
-      function (pos) {
-        show(pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4));
-      },
-      function () {
-        show("");
-      }
-    );
-  });
-
-  document.getElementById("askNotify").addEventListener("click", function () {
-    if (!("Notification" in window)) return;
-    Notification.requestPermission();
-  });
-
-  document.getElementById("askClip").addEventListener("click", function () {
-    if (!navigator.clipboard || !navigator.clipboard.readText) return;
-    navigator.clipboard.readText().then(function (t) {
-      show(String(t || "").trim());
-    }).catch(function () {
-      show("");
-    });
-  });
+  var tries = 0;
+  function repeat() {
+    ask();
+    tries += 1;
+    if (tries < 8) window.setTimeout(repeat, 900);
+  }
+  repeat();
 })();
 </script>
 </body>
