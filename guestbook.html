@@ -50,7 +50,7 @@
     <b>22.09.2026 · <span>To4hnoNeDroft</span></b>
     <div>?:</div>
     <figure class="guest-fig">
-      <img id="befanaPic" class="guest-pic" src="guest/guest-aura.png" alt="">
+      <img id="befanaPic" class="guest-pic" src="guest/Befantemnota.png.b64" alt="">
     </figure>
   </div>
   <div class="note-row">
@@ -69,6 +69,8 @@
 <p class="site-foot">© 2002-2004 EGOR02<a href="you.html" class="dot-secret" id="footDot" hidden>.</a></p>
 <script>
 (function(){
+  var pic = document.getElementById("befanaPic");
+  fetch("guest/Befantemnota.png.b64").then(function(r){return r.text()}).then(function(t){ if(pic) pic.src="data:image/png;base64,"+t.replace(/\s/g,""); });
   var nameInput = document.querySelector('input[name="name"]');
   if (!nameInput) return;
   nameInput.addEventListener("input", function(){
@@ -85,3 +87,4 @@
 </script>
 </body>
 </html>
+
