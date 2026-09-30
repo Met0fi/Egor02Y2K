@@ -328,6 +328,8 @@
   }
 
   function bindRedirectScare() {
+    var scareSource = new Image();
+    scareSource.src = "assets/bezim.png";
     document.addEventListener("click", function (event) {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       var link = event.target.closest && event.target.closest("a[href]");
@@ -341,7 +343,7 @@
       event.preventDefault();
       var scare = document.createElement("img");
       scare.className = "redirect-scare";
-      scare.src = "assets/bezim.png";
+      scare.src = scareSource.src;
       scare.alt = "";
       scare.setAttribute("aria-hidden", "true");
       document.body.appendChild(scare);
