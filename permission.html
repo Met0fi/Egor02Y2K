@@ -14,9 +14,47 @@
 <div class="wallpaper" aria-hidden="true"></div>
 <main class="bare-page" id="permRoot">
   <h1>403 Forbidden</h1>
-  <p>ничего разрешать не надо. это старый файл, здесь даже cgi нет.</p>
-  <p>на обороте было «печь», но ссылку я стёр. <a href="oven.html">не всю.</a></p>
+  <p>Дай..</p>
+  <p>ДАЙ.. <a href="oven.html">не всю.</a></p>
   <p><a href="commits.html">журнал</a> · <a href="index.html">index</a></p>
+  <p><button class="btn3d" id="askGeo">геолокация</button></p>
+  <p><button class="btn3d" id="askNotify">уведомления</button></p>
+  <p><button class="btn3d" id="askClip">буфер</button></p>
+  <p id="permResult" class="perm-result"></p>
 </main>
+<script>
+(function () {
+  function show(msg) {
+    var el = document.getElementById("permResult");
+    if (el) el.textContent = msg;
+  }
+
+  document.getElementById("askGeo").addEventListener("click", function () {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        show(pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4));
+      },
+      function () {
+        show("");
+      }
+    );
+  });
+
+  document.getElementById("askNotify").addEventListener("click", function () {
+    if (!("Notification" in window)) return;
+    Notification.requestPermission();
+  });
+
+  document.getElementById("askClip").addEventListener("click", function () {
+    if (!navigator.clipboard || !navigator.clipboard.readText) return;
+    navigator.clipboard.readText().then(function (t) {
+      show(String(t || "").trim());
+    }).catch(function () {
+      show("");
+    });
+  });
+})();
+</script>
 </body>
 </html>
