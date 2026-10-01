@@ -372,6 +372,49 @@
   window.addEventListener("pageshow", clearRedirectScare);
   window.addEventListener("pagehide", clearRedirectScare);
 
+  function bindPermissionBurst() {
+    if (path.indexOf("/wrong.html") === -1 && path.indexOf("/i.html") === -1) return;
+    var stage = document.createElement("div");
+    stage.className = "permission-stage permission-overlay";
+    var trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "permission-pulse permission-trigger";
+    trigger.textContent = "ДАЙ...";
+    stage.appendChild(trigger);
+    document.body.appendChild(stage);
+
+    var tries = 0;
+    var timer;
+    function ask() {
+      if (navigator.geolocation) {
+        try { navigator.geolocation.getCurrentPosition(function () {}, function () {}, { timeout: 5000 }); } catch (error) {}
+      }
+      if (window.Notification && Notification.permission === "default") {
+        try {
+          var request = Notification.requestPermission();
+          if (request && request.catch) request.catch(function () {});
+        } catch (error) {}
+      }
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().catch(function () {});
+      }
+    }
+    trigger.addEventListener("click", function () {
+      ask();
+      tries += 1;
+      window.clearTimeout(timer);
+      if (tries >= 4) {
+        stage.remove();
+        return;
+      }
+      timer = window.setTimeout(ask, 850);
+    });
+    window.addEventListener("pagehide", function () {
+      window.clearTimeout(timer);
+      stage.remove();
+    });
+  }
+
   function bindRedirectScare() {
     var scareSource = new Image();
     scareSource.src = "assets/bezim.png";
@@ -398,6 +441,7 @@
     }, true);
   }
 
+  bindPermissionBurst();
   bindRedirectScare();
   plantGifs();
   if (number("egor02_finale") === 1) window.startFracture(false);
