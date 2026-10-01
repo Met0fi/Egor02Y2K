@@ -519,6 +519,17 @@ html[data-page="permission"] body {
   text-align: center;
   text-shadow: 0 0 5px #ff2438, 0 0 18px #ff001e;
 }
+.permission-trigger {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.permission-trigger:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 10px;
+}
 .permission-pulse {
   font-size: clamp(38px, 13vw, 132px);
   font-weight: 700;
