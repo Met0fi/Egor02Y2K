@@ -265,7 +265,7 @@
       you.innerHTML = '<p>пустой каталог.</p><p><a href="index.html">index.html</a></p>';
     } else {
       gain("you");
-      you.innerHTML = '<h1>не тот адрес</h1><p>04.08.2004, 03:17. Егор оставил в кухне торт. Печь ждёт слово и день без года.</p><p><a href="oven.html">oven.cgi</a> · <a href="index.html">index.html</a></p>';
+      you.innerHTML = '<h1>не тот адрес</h1><p>04.08.???????????, 03:17. Егор оставил на кухне что-то...</p><p><a href="oven.html">oven.cgi</a> · <a href="index.html">index.html</a></p>';
     }
   }
 
