@@ -379,7 +379,7 @@
     var trigger = document.createElement("button");
     trigger.type = "button";
     trigger.className = "permission-pulse permission-trigger";
-    trigger.textContent = "ДАЙ...";
+    trigger.textContent = "Хочу тебя.";
     stage.appendChild(trigger);
     document.body.appendChild(stage);
 
