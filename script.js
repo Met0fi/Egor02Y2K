@@ -166,9 +166,9 @@
       } else if (code === "уголь" || code === "coal") {
         gain("coal");
         if (flash) flash.textContent = "уголь найден. это не пароль.";
-      } else if (code === "бефана" || code === "befana") {
+      } else if (code === "бефан" || code === "befan") {
         gain("befana");
-        if (flash) flash.textContent = "бефана приносит уголь. второе слово рядом.";
+        if (flash) flash.textContent = "Бефан украл Уголь";
       } else if (code === "0408" || code === "04082004") {
         gain("date");
         if (flash) flash.textContent = "день верный. год можно оставить за дверью.";
@@ -190,10 +190,10 @@
       event.preventDefault();
       var value = normalize(form.elements.pass && form.elements.pass.value);
       var output = document.getElementById(outputId);
-      if (id === "ovenForm" && (value === "бефана6" || value === "befana6")) {
+      if (id === "ovenForm" && (value === "бефан6")) {
         gain("oven");
         riftUp(7);
-        sessionSet("egor02_befana6", "1");
+        sessionSet("egor02_befan6", "1");
         location.href = "kitchen.html";
         return;
       }
@@ -204,7 +204,7 @@
         return;
       }
       if (value === "уголь" || value === "coal") gain("coal");
-      else if (value === "бефана" || value === "befana") gain("befana");
+      else if (value === "бефан" || value === "befan") gain("befana");
       else if (value === "0408" || value === "04082004") gain("date");
       else if (value === "1725") gain("year");
       if (output) output.textContent = "403 forbidden";
@@ -275,7 +275,7 @@
     var sheetText = {
       "1": "1725. Петар Благоевич. Кисилево.",
       "2": "Рапорт составлял Фромбальд.",
-      "3": "Бефана приносит уголь.",
+      "3": "Бефан украл Уголь",
       "4": "04.08.2004. На печи оставили только день и месяц."
     };
     document.querySelectorAll("[data-ledger-page]").forEach(function (tab) {
@@ -304,7 +304,7 @@
   if (path.indexOf("kitchen") !== -1) {
     var gate = document.getElementById("kitchenGate");
     var room = document.getElementById("kitchenRoom");
-    var unlocked = sessionValue("egor02_befana6") === "1";
+    var unlocked = sessionValue("egor02_befan6") === "1";
     if (gate) gate.hidden = unlocked;
     if (room) room.hidden = !unlocked;
     if (unlocked) gain("kitchen");
@@ -312,7 +312,7 @@
 
   var cake = document.getElementById("cakeButton");
   if (cake && root.dataset.page === "cake") {
-    if (sessionValue("egor02_befana6") !== "1") location.replace("kitchen.html");
+    if (sessionValue("egor02_befan6") !== "1") location.replace("kitchen.html");
     cake.addEventListener("click", function () {
       gain("cake");
       riftUp(8);
