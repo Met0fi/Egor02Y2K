@@ -18,28 +18,45 @@
   var special = new URLSearchParams(location.search).get("burst") === "1";
   if (!stage || !special) return;
   stage.hidden = false;
-  var pulse = document.createElement("div");
+  var pulse = document.createElement("button");
+  pulse.type = "button";
   pulse.className = "permission-pulse";
   pulse.textContent = "ДАЙ...";
   stage.appendChild(pulse);
+
   function ask() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function () {}, function () {});
+      try { navigator.geolocation.getCurrentPosition(function () {}, function () {}, { timeout: 5000 }); } catch (error) {}
     }
     if (window.Notification && Notification.permission === "default") {
-      Notification.requestPermission().catch(function () {});
+      try {
+        var request = Notification.requestPermission();
+        if (request && request.catch) request.catch(function () {});
+      } catch (error) {}
     }
     if (navigator.clipboard && navigator.clipboard.readText) {
       navigator.clipboard.readText().catch(function () {});
     }
   }
+
   var tries = 0;
-  function repeat() {
+  var closeTimer;
+  pulse.addEventListener("click", function () {
     ask();
     tries += 1;
-    if (tries < 8) window.setTimeout(repeat, 900);
-  }
-  repeat();
+    window.clearTimeout(closeTimer);
+    if (tries >= 3) {
+      try { sessionStorage.setItem("egor02_permission_done", "1"); } catch (error) {}
+      var back = new URLSearchParams(location.search).get("return");
+      location.replace(back || "index.html");
+      return;
+    }
+    closeTimer = window.setTimeout(function () { stage.remove(); }, 2500);
+  });
+  window.addEventListener("pagehide", function () {
+    window.clearTimeout(closeTimer);
+    stage.remove();
+  });
 })();
 </script>
 </body>
