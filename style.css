@@ -1202,3 +1202,102 @@ html[data-decay="4"] .offset-later {
     animation: none !important;
   }
 }
+
+@media (hover: none), (pointer: coarse) {
+  .hotspot {
+    width: 44px;
+    height: 44px;
+    opacity: .36;
+  }
+
+  .hotspot:active,
+  .hotspot:focus-visible {
+    opacity: 1;
+  }
+
+  .hotspot .pic-slot {
+    transform: scale(.72);
+    transform-origin: top left;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+
+  .stack {
+    width: calc(100% - 8px);
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .cell {
+    padding: 8px 6px;
+  }
+
+  .cell-head {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .kid-table {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+
+  .kid-table td {
+    padding: 8px 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .dump {
+    width: calc(100% - 12px);
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .badge88,
+  .btn3d {
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .badge88 {
+    height: auto;
+    padding: 6px 4px;
+  }
+
+  .guest-form td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .guest-form input,
+  .guest-form textarea,
+  .btn3d,
+  .myth-btn {
+    font-size: 16px;
+  }
+
+  .cat-row {
+    gap: 7px;
+  }
+
+  .cat-row img,
+  .cat-row img:nth-child(2),
+  .cat-row img:nth-child(3),
+  .cat-row a img {
+    width: min(28vw, 96px);
+    height: min(28vw, 96px);
+  }
+
+  .meet {
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow-wrap: anywhere;
+  }
+}
